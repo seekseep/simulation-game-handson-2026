@@ -1,0 +1,130 @@
+:root {
+  font-size: min(5vw, 5vh);
+  font-family: "Hachi Maru Pop", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+button, input {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+body {
+  margin: 0;
+}
+
+.avaterView {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.messageBox {
+  position: absolute;
+  left: 10vw;
+  bottom: 5vh;
+  width: 80vw;
+  text-align: center;
+  background-color: #fff;
+  border: 0.1rem solid #000;
+  line-height: 1.5;
+  min-height: 1.5rem;
+
+  display: none;
+  &.shown {
+    display: block;
+  }
+}
+
+.actionMenu {
+  position: absolute;
+  top: 5vh;
+  left: 5vw;
+  background-color: #fff;
+  border: 0.1rem solid #000;
+  padding: 0.5rem;
+
+  display: none;
+  &.shown {
+    display: block;
+  }
+
+  button {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 0.25rem;
+    background-color: #fff;
+    border: 0.1rem solid #000;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.inputWordDialog {
+  grid-template-areas:
+    "input input"
+    "cancel submit";
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+
+  &[open] {
+    display: grid;
+  }
+
+  button {
+    font-size: 1rem;
+    background: #FFF;
+  }
+
+  input {
+    font-size: 1rem;
+    grid-area: input;
+    border: 0.1rem solid #000;
+  }
+
+  .cancel {
+    grid-area: cancel;
+  }
+
+  .submit {
+    grid-area: submit;
+  }
+}
+
+.selectCategoryDialog {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &:not([open]) {
+    display: none;
+  }
+
+  button {
+    font-size: 1rem;
+    background: #FFF;
+    border: 0.1rem solid #000;
+    padding: 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  }
+
+  .cancel {
+    margin-top: 0.5rem;
+  }
+}
