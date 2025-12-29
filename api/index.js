@@ -1,3 +1,10 @@
+/**
+ *
+ * @param {Request} request
+ * @param {Response} response
+ * @returns
+ */
 export default async function handler(request, response) {
-  return response.status(200).json({ message: "OK" });
+  response.setHeader('Content-Type', 'text/plain')
+  return response.status(200).send('OK')
 }
