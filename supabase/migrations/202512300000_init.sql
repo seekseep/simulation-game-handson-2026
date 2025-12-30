@@ -9,8 +9,9 @@ CREATE TABLE words (
   word_category_id INTEGER NOT NULL
 );
 
-CREATE TABLE lines (
+CREATE TABLE line_templates (
   id SERIAL PRIMARY KEY,
-  template TEXT NOT NULL,
-  word_category_id INTEGER NOT NULL
+  content TEXT NOT NULL,
+  word_category_id INTEGER NOT NULL,
+  motion_name TEXT NOT NULL
 );

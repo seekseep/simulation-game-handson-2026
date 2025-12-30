@@ -1,10 +1,8 @@
-/**
- *
- * @param {Request} request
- * @param {Response} response
- * @returns
- */
-export default async function handler(request, response) {
-  response.setHeader('Content-Type', 'text/plain')
-  return response.status(200).send('OK')
+export async function GET() {
+  return new Response('OK', {
+    status: 200,
+    headers: {
+      'Content-Type': 'text/plain'
+    }
+  })
 }
