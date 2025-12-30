@@ -13,6 +13,10 @@ async function main () {
   const inputWordDialog = new InputWordDialog();
   const selectCategoryDialog = new SelectCategoryDialog();
 
+  avaterView.addEventListener('load', () => {
+    avaterView.changeAnimalMotion('sparrow-1');
+  });
+
   document.body.appendChild(avaterView.element);
   document.body.appendChild(messageBox.element);
   document.body.appendChild(actionMenu.element);
@@ -20,7 +24,7 @@ async function main () {
   document.body.appendChild(selectCategoryDialog.element);
 
   // カテゴリをAPIから取得
-  const categories = await apiClient.getWordCategories();
+  let categories = []
 
   const handleTeach = async () => {
     await messageBox.showAsync('何を教えてくれるの？', 1000);
@@ -74,10 +78,6 @@ async function main () {
     }
   }
 
-  avaterView.addEventListener('load', () => {
-    avaterView.changeAnimalMotion('sparrow-1');
-  });
-
   avaterView.addEventListener('animal-click', async () => {
     actionMenu.open([
       {
@@ -90,6 +90,8 @@ async function main () {
       }
     ])
   })
+
+  categories = await apiClient.getWordCategories();
 }
 
 main();
