@@ -12,15 +12,11 @@ export default class TwoDAvaterView extends EventTarget {
   // モーション名に対応する絵文字のマッピング
   static EMOJI_MAP = {
     'idle': '🙂',
-    'walk': '🚶',
-    'run': '🏃',
-    'jump': '🦘',
-    'dance': '💃',
-    'sleep': '😴',
-    'eat': '🍽️',
-    'sit': '🪑',
-    'stand': '🧍',
-    'wave': '👋',
+    'attack': '😠',
+    'rolling': '😵‍💫',
+    'confused': '😵',
+    'damaged': '🤕',
+    'shifty': '😏',
     'default': '🙂'
   };
 
