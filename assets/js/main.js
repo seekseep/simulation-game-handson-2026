@@ -14,7 +14,7 @@ async function main () {
   const selectCategoryDialog = new SelectCategoryDialog();
 
   avaterView.addEventListener('load', () => {
-    avaterView.changeAnimalMotion('sparrow-idle');
+    avaterView.changeAnimalMotion('idle');
   });
 
   document.body.appendChild(avaterView.element);
