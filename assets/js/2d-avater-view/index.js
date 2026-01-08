@@ -67,12 +67,6 @@ export default class TwoDAvaterView extends EventTarget {
     const emoji = TwoDAvaterView.EMOJI_MAP[motionName] || TwoDAvaterView.EMOJI_MAP.default;
 
     if (this.currentEmoji !== emoji) {
-      // アニメーション効果を追加
-      this.emojiElement.style.transform = 'scale(1.2)';
-      setTimeout(() => {
-        this.emojiElement.style.transform = 'scale(1)';
-      }, 300);
-
       this.currentEmoji = emoji;
       this.emojiElement.textContent = emoji;
     }
