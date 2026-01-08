@@ -71,7 +71,7 @@ async function main () {
       messageBox.hide();
 
       // デフォルトのモーションに戻す
-      avaterView.changeAnimalMotion('sparrow-idle');
+      avaterView.changeAnimalMotion('idle');
     } catch (error) {
       await messageBox.showAsync('今日はいい天気だね！', 2000);
       messageBox.hide();
