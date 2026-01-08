@@ -14,7 +14,7 @@ async function main () {
   const selectCategoryDialog = new SelectCategoryDialog();
 
   avaterView.addEventListener('load', () => {
-    avaterView.changeAnimalMotion('sparrow-1');
+    avaterView.changeAnimalMotion('sparrow-idle');
   });
 
   document.body.appendChild(avaterView.element);
@@ -71,7 +71,7 @@ async function main () {
       messageBox.hide();
 
       // デフォルトのモーションに戻す
-      avaterView.changeAnimalMotion('sparrow-1');
+      avaterView.changeAnimalMotion('sparrow-idle');
     } catch (error) {
       await messageBox.showAsync('今日はいい天気だね！', 2000);
       messageBox.hide();

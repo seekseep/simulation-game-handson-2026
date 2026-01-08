@@ -2,12 +2,12 @@ import * as THREE from 'three';
 
 export const ObjectNameByMotionName = Object.freeze({
   // SPARROW
-  'sparrow-1': 'Rig',
-  'sparrow-2': 'Rig009',
-  'sparrow-3': 'Rig023',
-  'sparrow-4': 'Sparrow_LOD1004',
-  'sparrow-5': 'Sparrow_LOD1005',
-  'sparrow-6': 'Sparrow_LOD1006',
+  'idle': 'Rig',
+  'attack': 'Rig009',
+  'rolling': 'Rig023',
+  'confused': 'Sparrow_LOD1004',
+  'damaged': 'Sparrow_LOD1005',
+  'shifty': 'Sparrow_LOD1006',
   // GECKO
   'gecko-1': 'Rig001',
   'gecko-2': 'Rig010',
