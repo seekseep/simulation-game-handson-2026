@@ -9,10 +9,6 @@ const words = storage.getWords()
 const categories = storage.getWordCategories()
 const templates = storage.getTemplates()
 
-avater.view.addEventListener('load', () => {
-  avater.view.changeAnimalMotion('idle')
-})
-
 avater.view.addEventListener('animal-click', () => {
   menu.open()
 })
@@ -35,17 +31,17 @@ menu.teachButton.addEventListener('click', async () => {
   console.log('動物に教える')
   menu.close()
 
-  const word = await inputWordDialog.open()
+  const content = await inputWordDialog.open()
   if (!word) {
     await speaker.start('言葉の入力がキャンセルされました')
   }
-  await speaker.start(`「${word}」を教えました`)
+  await speaker.start(`「${content}」を教えました`)
 
   const wordCategory = await selectWordCategoryDialog.open(categories)
 
   await speaker.start(`「${wordCategory}」の分野を選びました`)
 
-  words.push({ word, category: wordCategory })
+  words.push({ content, category: wordCategory })
 
   storage.putWords(words)
 

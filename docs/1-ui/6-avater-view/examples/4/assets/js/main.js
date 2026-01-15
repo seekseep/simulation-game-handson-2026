@@ -14,5 +14,10 @@ view.addEventListener('load', () => {
 })
 
 view.addEventListener('animal-click', () => {
+  // view.changeAnimalMotion('idle')
   view.changeAnimalMotion('attack')
+  // view.changeAnimalMotion('rolling')
+  // view.changeAnimalMotion('confused')
+  // view.changeAnimalMotion('damaged')
+  // view.changeAnimalMotion('shifty')
 })

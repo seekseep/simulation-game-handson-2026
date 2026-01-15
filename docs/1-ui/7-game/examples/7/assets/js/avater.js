@@ -8,3 +8,7 @@ export const view = new AvaterView({
   fanGlbUrl: './assets/glb/fan.glb',
   animalsGlbUrl: './assets/glb/animals.glb',
 })
+
+view.addEventListener('load', () => {
+  view.changeAnimalMotion('idle')
+})

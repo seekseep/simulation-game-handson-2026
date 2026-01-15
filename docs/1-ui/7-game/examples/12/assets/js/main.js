@@ -6,10 +6,6 @@ import * as speaker from './speaker.js'
 
 const words = []
 
-avater.view.addEventListener('load', () => {
-  avater.view.changeAnimalMotion('idle')
-})
-
 avater.view.addEventListener('animal-click', () => {
   menu.open()
 })
@@ -19,18 +15,18 @@ menu.talkButton.addEventListener('click', () => {
   menu.close()
 
   const word = words[Math.floor(Math.random() * words.length)]
-  speaker.start(`${word.word}は${word.category}の言葉です！`)
+  speaker.start(`${word.content}は${word.category}の言葉です！`)
 })
 
 menu.teachButton.addEventListener('click', async () => {
   console.log('動物に教える')
   menu.close()
 
-  const word = await inputWordDialog.open()
-  if (!word) {
+  const content = await inputWordDialog.open()
+  if (!content) {
     await speaker.start('言葉の入力がキャンセルされました')
   }
-  await speaker.start(`「${word}」を教えました`)
+  await speaker.start(`「${content}」を教えました`)
 
   const wordCategory = await selectWordCategoryDialog.open([
     'あいさつ',
@@ -41,6 +37,6 @@ menu.teachButton.addEventListener('click', async () => {
 
   await speaker.start(`「${wordCategory}」の分野を選びました`)
 
-  words.push({ word, category: wordCategory })
+  words.push({ content, category: wordCategory })
   console.log({ words })
 })

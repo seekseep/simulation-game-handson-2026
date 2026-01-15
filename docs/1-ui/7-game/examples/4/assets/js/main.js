@@ -2,10 +2,6 @@ import * as avater from './avater.js'
 import * as menu from './menu.js'
 import * as inputWordDialog from './inputWordDialog.js'
 
-avater.view.addEventListener('load', () => {
-  avater.view.changeAnimalMotion('idle')
-})
-
 avater.view.addEventListener('animal-click', () => {
   menu.open()
 })
@@ -19,7 +15,7 @@ menu.teachButton.addEventListener('click', async () => {
   console.log('動物に教える')
   menu.close()
 
-  const word = await inputWordDialog.open()
+  const content = await inputWordDialog.open()
   if (word) {
     console.log(`動物に「${word}」を教えました`)
   } else {
