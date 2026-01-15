@@ -32,7 +32,7 @@ menu.teachButton.addEventListener('click', async () => {
   menu.close()
 
   const content = await inputWordDialog.open()
-  if (!word) {
+  if (!content) {
     await speaker.start('言葉の入力がキャンセルされました')
   }
   await speaker.start(`「${content}」を教えました`)
@@ -41,7 +41,7 @@ menu.teachButton.addEventListener('click', async () => {
 
   await speaker.start(`「${wordCategory.name}」の分野を選びました`)
 
-  words.push({ word, wordCategoryId: wordCategory.id })
+  words.push({ content, wordCategoryId: wordCategory.id })
 
   storage.putWords(words)
 

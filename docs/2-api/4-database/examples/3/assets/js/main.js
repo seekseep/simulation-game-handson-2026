@@ -33,7 +33,7 @@ async function main () {
     menu.close()
 
     const content = await inputWordDialog.open()
-    if (!word) {
+    if (!content) {
       await speaker.start('言葉の入力がキャンセルされました')
     }
     await speaker.start(`「${content}」を教えました`)

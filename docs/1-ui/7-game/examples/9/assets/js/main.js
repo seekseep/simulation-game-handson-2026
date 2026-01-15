@@ -18,7 +18,7 @@ menu.teachButton.addEventListener('click', async () => {
   menu.close()
 
   const content = await inputWordDialog.open()
-  if (!word) {
+  if (!content) {
     await speaker.start('言葉の入力がキャンセルされました')
     return
   }
