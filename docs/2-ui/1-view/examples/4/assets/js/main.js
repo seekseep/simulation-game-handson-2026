@@ -1,8 +1,6 @@
 import * as avater from './avater.js'
 import * as menu from './menu.js'
 import * as inputWordDialog from './inputWordDialog.js'
-import * as selectWordCategoryDialog from './selectWordCategoryDialog.js'
-import * as speaker from './speaker.js'
 
 avater.view.addEventListener('animal-click', () => {
   menu.open()
@@ -18,17 +16,9 @@ menu.teachButton.addEventListener('click', async () => {
   menu.close()
 
   const content = await inputWordDialog.open()
-  if (word) {
-    speaker.start(`「${word}」を教えました`)
+  if (content) {
+    console.log(`動物に「${content}」を教えました`)
   } else {
-    speaker.start('言葉の入力がキャンセルされました')
+    console.log('言葉の入力がキャンセルされました')
   }
-
-  const wordCategory = await selectWordCategoryDialog.open([
-    'あいさつ',
-    '食べ物',
-    '必殺技',
-    '場所'
-  ])
-  speaker.start(`「${wordCategory}」の分野を選びました`)
 })

@@ -17,8 +17,8 @@ menu.teachButton.addEventListener('click', async () => {
   menu.close()
 
   const content = await inputWordDialog.open()
-  if (word) {
-    console.log(`動物に「${word}」を教えました`)
+  if (content) {
+    console.log(`動物に「${content}」を教えました`)
   } else {
     console.log('言葉の入力がキャンセルされました')
   }
