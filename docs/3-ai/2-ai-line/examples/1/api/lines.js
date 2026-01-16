@@ -30,7 +30,7 @@ export async function POST() {
 
   // Gemini APIで性格を反映した言い回しに変換
   const genAI = getGeminiClient()
-  const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
+  const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
 
   const prompt = `
 あなたは明るく元気で前向きなキャラクターです。
