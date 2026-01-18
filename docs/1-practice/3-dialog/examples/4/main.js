@@ -1,5 +1,5 @@
 const dialog = document.getElementById("dialog")
-const openButton = document.querySelector("button")
+const openButton = document.getElementById("openButton")
 const closeButton = document.getElementById("closeButton")
 
 openButton.addEventListener("click", () => {
