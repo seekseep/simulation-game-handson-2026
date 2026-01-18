@@ -4,5 +4,5 @@ const dog = document.getElementById("dog")
 button.addEventListener("click", () => {
   setTimeout(() => {
     dog.hidden = false
-  }, 500)
+  }, 1000)
 })

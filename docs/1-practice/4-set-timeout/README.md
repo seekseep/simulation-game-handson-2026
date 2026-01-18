@@ -1,36 +1,29 @@
 # setTimeout
 
-このセクションでは、`setTimeout` を使って、時間を扱う処理を学びます。
-アニメーションの基礎になる重要な概念です。
+この節でJavaScriptの標準APIである `setTimeout` を学びます。
 
-## 準備
+プログラムを配置するためのディレクトリを作成します。
 
-practice ディレクトリの中に、このセクション用のディレクトリを作成します。
-
-```bash
-cd practice
-mkdir 4-set-timeout
-cd 4-set-timeout
+```
+./
+└── practice
+    └── set-timeout
 ```
 
----
+# ファイルの用意
 
-# サンプル1: 基本のHTML
+まずは 1 というディレクトリを作成してその中に `index.html` と `main.js` を作成します。
 
-実装例: `examples/1`
+```
+./
+└── practice
+    └── set-timeout
+        └── 1
+            ├── index.html
+            └── main.js
+```
 
-## 目標
-
-まず、基本となる HTML を作成します。犬の絵文字とボタンを表示するだけです。
-
-## 作業
-
-1. `index.html` ファイルを作成する
-2. `main.js` ファイルを作成する
-
-## 1. index.html ファイルを作成する
-
-ファイル名: `practice/4-set-timeout/index.html`
+## `index.html`
 
 ```html
 <html>
@@ -39,44 +32,26 @@ cd 4-set-timeout
     <div>🐕️</div>
   </body>
 </html>
+
 ```
 
-## 2. main.js ファイルを作成する
+## `main.js`
 
-ファイル名: `practice/4-set-timeout/main.js`
-
-```javascript
+```js
 // 何も書かない
-```
 
-空のファイルを作成してください。
+```
 
 ## 動作確認
 
-`index.html` ファイルをブラウザで開いてください。
+ボタンと犬の絵文字が表示されます。
+ボタンを押しても何も起こりません。
 
-**期待する結果:**
-- ボタンと犬の絵文字が表示される
-- ボタンをクリックしても何も起きない
+![1-1の結果](assets/screenshot-1-1.png)
 
----
+# 犬を表示する
 
-# サンプル2: ボタンで犬を表示
-
-実装例: `examples/2`
-
-## 目標
-
-ボタンをクリックしたら、犬の絵文字を表示します（まだ setTimeout は使いません）。
-
-## 作業
-
-1. `index.html` を変更する
-2. `main.js` を変更する
-
-## 1. index.html を変更する
-
-ファイル名: `practice/4-set-timeout/index.html`
+## `index.html`
 
 ```html
 <html>
@@ -86,17 +61,14 @@ cd 4-set-timeout
     <script src="main.js"></script>
   </body>
 </html>
+
 ```
 
-**解説:**
-- `hidden` - 最初は非表示にします
-- `<script src="main.js"></script>` - JavaScript ファイルを読み込みます
+- `id="dog"` に `hidden` 属性を追加して、最初は犬の絵文字を非表示にします。
 
-## 2. main.js を変更する
+## `main.js`
 
-ファイル名: `practice/4-set-timeout/main.js`
-
-```javascript
+```js
 const button = document.getElementById("button")
 const dog = document.getElementById("dog")
 
@@ -105,94 +77,73 @@ button.addEventListener("click", () => {
 })
 ```
 
-**解説:**
-- ボタンをクリックしたら、`hidden` を `false` にして表示します
+- `document.getElementById("button")` でボタン要素を取得します。
+- `document.getElementById("dog")` で犬の絵文字の要素を取得します。
+- ボタンがクリックされたときに、犬の絵文字の `hidden` 属性を `false` にして表示します。
 
 ## 動作確認
 
-ブラウザを更新してください。
+ブラウザで `index.html` を開いてください。
 
-**期待する結果:**
-- 最初は犬が非表示
-- ボタンをクリックすると、即座に犬が表示される
+ボタンをクリックすると即座に犬の絵文字が表示されます。
 
----
+![1-2の結果](assets/demo-1-2.gif)
 
-# サンプル3: setTimeout で遅延表示
+# 時間を開けて犬を表示する
 
-実装例: `examples/3`
+次に、ボタンを押してから 1秒後に犬の絵文字が表示されるようにします。
 
-## 目標
+## `main.js`
 
-`setTimeout` を使って、ボタンをクリックしてから 500ms（0.5秒）後に犬を表示します。
-
-## 作業
-
-1. `main.js` を変更する
-
-## 1. main.js を変更する
-
-ファイル名: `practice/4-set-timeout/main.js`
-
-```javascript
+```js
 const button = document.getElementById("button")
 const dog = document.getElementById("dog")
 
 button.addEventListener("click", () => {
   setTimeout(() => {
     dog.hidden = false
-  }, 500)
+  }, 1000)
 })
 ```
 
-**解説:**
-- `setTimeout(関数, 時間)` - 指定した時間（ミリ秒）後に関数を実行します
-- `500` - 500ミリ秒 = 0.5秒
-- `() => { ... }` - 実行する処理をアロー関数で書きます
+- `1000` ミリ秒は 1 秒を表します。
+- `setTimeout` は指定した時間が経過した後に指定した関数を実行します。
+- これにより、ボタンがクリックされてから 1 秒後に犬の絵文字が表示されるようになります。
 
 ## 動作確認
 
-ブラウザを更新してください。
+ブラウザで `index.html` を開いてください。
+ボタンをクリックしてから 1 秒後に犬の絵文字が表示されます。
 
-**期待する結果:**
-- ボタンをクリックする
-- 0.5秒待つ
-- 犬が表示される
+![1-3の結果](assets/demo-1-3.gif)
 
----
+# 犬が吠える
 
-# サンプル4: 複数の setTimeout
+さらに setTimout の理解を深めるために犬が吠えるアニメーションを追加します。
 
-実装例: `examples/4`
-
-## 目標
-
-複数の `setTimeout` を使って、段階的にアニメーションします。
-
-## 作業
-
-1. `index.html` を変更する
-2. `main.js` を変更する
-
-## 1. index.html を変更する
-
-ファイル名: `practice/4-set-timeout/index.html`
+## `index.html`
 
 ```html
 <html>
   <body>
     <button id="button">クリック</button>
-    <div id="barking"></div>
+    <div>
+      <span id="barking"></span>
+      <span id="dog">🐕️</span>
+    </div>
     <script src="main.js"></script>
   </body>
 </html>
+
 ```
 
-## 2. main.js を変更する
+- `<span id="barking"></span>` を追加して、犬の吠える様子を表示する要素を作成します。
+  - ここには最初は何も表示されません。
+  - ボタンを押してから絵文字が表示されるようにします。
 
-ファイル名: `practice/4-set-timeout/main.js`
+## `main.js`
 
-```javascript
+```js
 const button = document.getElementById("button")
 const barking = document.getElementById("barking")
 
@@ -208,40 +159,30 @@ button.addEventListener("click", () => {
     barking.textContent = "💥💥💥💥"
   }, 2000)
 })
+
 ```
 
-**解説:**
-- 0ms: 💥 （即座に）
-- 500ms後: 💥💥
-- 1500ms後: 💥💥💥
-- 2000ms後: 💥💥💥💥
+- `barking.textContent` に "💥" を設定して、最初の吠える様子を表示します。
+- 吠える様子を段階的に変化させます。
+  - 0 ミリ秒後に "💥"
+  - 500 ミリ秒後に "💥💥"
+  - 1500 ミリ秒後に "💥💥💥"
+  - 2000 ミリ秒後に "💥💥💥💥"
 
 ## 動作確認
 
-ブラウザを更新してください。
+ブラウザで `index.html` を開いてください。
+ボタンをクリックすると犬が吠えるアニメーションが表示されます。
 
-**期待する結果:**
-- ボタンをクリックすると、💥が少しずつ増えていく
+![2-1の結果](assets/demo-2-1.gif)
 
----
+#　効率的な書き方
 
-# サンプル5: ループと setTimeout
+現在の実装方法だと絵文字の数が増えるためにコードが冗長になってしまいます。
 
-実装例: `examples/5`
+## `main.js`
 
-## 目標
-
-ループを使って、サンプル4と同じ効果を短いコードで実現します。
-
-## 作業
-
-1. `main.js` を変更する
-
-## 1. main.js を変更する
-
-ファイル名: `practice/4-set-timeout/main.js`
-
-```javascript
+```js
 const button = document.getElementById("button")
 const barking = document.getElementById("barking")
 
@@ -252,154 +193,126 @@ button.addEventListener("click", () => {
       }, i * 500)
   }
 })
+
 ```
 
-**解説:**
-- `for (let i = 1; i <= 4; i++)` - 1から4まで繰り返します
-- `"💥".repeat(i)` - 💥を i 回繰り返した文字列を作ります
-- `i * 500` - i が 1 なら 500ms、2 なら 1000ms...と計算されます
+- `for` ループを使用して、吠える様子の更新を効率的に行います。
+- `i` を 1 から 4 まで増加させ、各段階で `setTimeout` を設定します。
+- `barking.textContent = "💥".repeat(i)` で "💥" を `i` 回繰り返す
 
-**実行される内容:**
-- i=1: 500ms後に 💥
-- i=2: 1000ms後に 💥💥
-- i=3: 1500ms後に 💥💥💥
-- i=4: 2000ms後に 💥💥💥💥
+|i|絵文字|実行タイミング|
+|-|-|-|
+|1|💥|1 * 500 = 500 ミリ秒後|
+|2|💥💥|2 * 500 = 1000 ミリ秒後|
+|3|💥💥💥|3 * 500 = 1500 ミリ秒後|
+|4|💥💥💥💥|4 * 500 = 2000 ミリ秒後|
 
 ## 動作確認
 
-ブラウザを更新してください。
+ブラウザで `index.html` を開いてください。
+ボタンをクリックすると犬が吠えるアニメーションが表示されます。
 
-**期待する結果:**
-- サンプル4と同じ動作（💥が少しずつ増える）
+![2-2の結果](assets/demo-2-2.gif)
 
----
+# 文字の長さに応じた実装
 
-# サンプル6: slice で一文字ずつ表示
+絵文字以外も表示できるように実装しましょう。
 
-実装例: `examples/6`
+## 文字列から文字を抜き出す
 
-## 目標
+一般的な文字列の場合は `slice` メソッドを使用して部分文字列を取得します。
 
-文字列の `slice` メソッドを使って、文字を一つずつ表示します。
-
-## 作業
-
-1. `index.html` を変更する（犬の絵文字を追加）
-2. `main.js` を変更する
-
-## 1. index.html を変更する
-
-ファイル名: `practice/4-set-timeout/index.html`
-
-```html
-<html>
-  <body>
-    <button id="button">クリック</button>
-    <div>
-      <span id="barking"></span>
-      <span id="dog">🐕️</span>
-    </div>
-    <script src="main.js"></script>
-  </body>
-</html>
+```js
+const str = "Hello, World!"
+const part = str.slice(0, 5) // "Hello"
 ```
 
-## 2. main.js を変更する
+ただし絵文字などの場合は、1文字が複数のコードポイントで構成されていることがあるため次のようになることがあります。
 
-ファイル名: `practice/4-set-timeout/main.js`
+```js
+const str = "💥🍖💥🐈️💥"
+str.split("") // ["�", "�", "�", "�", "�", "�", "�", "�", "�", "�"]
 
-```javascript
+```
+
+そのため `Array.from` を使用して文字の配列を取得します。
+
+```js
+const str = "🍖💥🐈️"
+const characters = Array.from(str) // ["🍖", "💥", "🐈️"]
+```
+
+
+## `main.js`
+
+```js
 const button = document.getElementById("button")
 const barking = document.getElementById("barking")
 
 button.addEventListener("click", () => {
-  const barkingContent = "💥💥💥💥"
+  const barkingContent = "💥🍖💥🐈️💥"
+  const characters = Array.from(barkingContent)
 
   for (let i = 1; i <= barkingContent.length; i++) {
       setTimeout(() => {
-        barking.textContent = barkingContent.slice(0, i)
+        const content = characters.slice(0, i).join("")
+        barking.textContent = content
       }, i * 500)
   }
 })
+
+
 ```
 
-**解説:**
-- `barkingContent.length` - 文字列の長さ（4文字）
-- `barkingContent.slice(0, i)` - 0文字目から i 文字目までを切り出します
-  - i=1: "💥"
-  - i=2: "💥💥"
-  - i=3: "💥💥💥"
-  - i=4: "💥💥💥💥"
+- `barkingContent` に表示したい文字列を設定します。
+- `Array.from(barkingContent)` で文字の配列を取得します。
+- `for` ループで文字列の長さに応じて `setTimeout` を設定します。
+- `characters.slice(0, i).join("")` で最初の `i` 文字を結合して表示します。
 
 ## 動作確認
 
-ブラウザを更新してください。
+ブラウザで `index.html` を開いてください。
+ボタンをクリックすると犬が吠えるアニメーションが表示されます。
 
-**期待する結果:**
-- 💥が一つずつ増えていく
-- 最後に犬の絵文字が右側に表示される
+![2-3の結果](assets/demo-2-3.gif)
 
----
+# 文字を表示する
 
-# サンプル7: 日本語テキストのアニメーション
+絵文字でなく文字を表示することができます。
 
-実装例: `examples/7`
 
-## 目標
+## `main.js`
 
-日本語のテキスト「わんわんわんわん」を一文字ずつ表示します。
-
-## 作業
-
-1. `main.js` を変更する
-
-## 1. main.js を変更する
-
-ファイル名: `practice/4-set-timeout/main.js`
-
-```javascript
+```js
 const button = document.getElementById("button")
 const barking = document.getElementById("barking")
 
 button.addEventListener("click", () => {
   const barkingContent = "わんわんわんわん"
+  const characters = Array.from(barkingContent)
 
-  for (let i = 1; i <= barkingContent.length; i++) {
+  for (let i = 1; i <= characters.length; i++) {
       setTimeout(() => {
-        barking.textContent = barkingContent.slice(0, i)
+        barking.textContent = characters.slice(0, i).join("")
       }, i * 500)
   }
 })
-```
 
-**解説:**
-- `barkingContent = "わんわんわんわん"` に変更しただけです
-- 同じ仕組みで日本語も一文字ずつ表示できます
+```
 
 ## 動作確認
 
-ブラウザを更新してください。
+ブラウザで `index.html` を開いてください。
+ボタンをクリックすると犬が吠えるアニメーションが表示されます。
 
-**期待する結果:**
-- 「わ」「わん」「わんわ」...と一文字ずつ増えていく
-- 0.5秒ごとに文字が追加される
-
----
-
-## まとめ
-
-このセクションで学んだこと:
-
-1. **setTimeout の基本** - 指定時間後に処理を実行
-2. **複数の setTimeout** - 段階的なアニメーション
-3. **ループと組み合わせ** - 繰り返し処理を簡潔に書く
-4. **文字列操作** - repeat や slice を使った文字列処理
-5. **テキストアニメーション** - 一文字ずつ表示する仕組み
-
-`setTimeout` は、アニメーションや時間差で何かを実行したいときに使います。
-次のセクションでは、さらに高度な非同期処理を学びます。
+![2-4の結果](assets/demo-2-4.gif)
 
 ---
+
+# まとめ
+
+この節では `setTimeout` を使用して時間を開けて処理を実行する方法を学びました。
+setTimeout を使用することで、非同期的に処理を実行することができます。
 
 # 次の項
 
