@@ -1,4 +1,5 @@
 const numbers = [1, 4, 3, 5, 2, 8, 7, 6]
+console.log(numbers)
 
 for (let i = 0; i < numbers.length - 1; i++) {
   for (let j = 0; j < numbers.length - 1 - i; j++) {

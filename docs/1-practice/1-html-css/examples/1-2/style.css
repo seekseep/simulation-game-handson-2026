@@ -1,0 +1,11 @@
+.box {
+  position: absolute;
+  width: 150px;
+  height: 200px;
+  border: solid 5px black;
+  background: white;
+  padding: 10px;
+
+  right: 10px;
+  bottom: 10px;
+}
