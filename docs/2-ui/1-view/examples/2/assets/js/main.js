@@ -1,1 +1,1 @@
-import * as avater from './avater.js'
+import './avater.js'

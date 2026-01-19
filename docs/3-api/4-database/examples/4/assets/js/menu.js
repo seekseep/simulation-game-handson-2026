@@ -1,4 +1,4 @@
-export const root = document.getElementById('menu')
+const root = document.getElementById('menu')
 export const teachButton = document.getElementById('teachButton')
 export const talkButton = document.getElementById('talkButton')
 

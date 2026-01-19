@@ -68,7 +68,7 @@ VSCode を起動して左側に表示されるエクスプローラペインの�
 3. [ダイアログの作成](3-dialog/README.md)
 4. [setTimeout の使い方](4-set-timeout/README.md)
 5. [非同期処理の基本](5-async/README.md)
-6. [3DCG の操作](6-avater-view/README.md)
+6. [3DCG の操作](6-aveterView/README.md)
 
 ---
 

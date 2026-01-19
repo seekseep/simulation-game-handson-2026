@@ -10,14 +10,14 @@
 
 次のリンクからファイルをダウンロードしてください。
 
-- [assets/js/avater-view.zip](assets/js/avater-view.zip)
+- [assets/js/aveterView.zip](assets/js/aveterView.zip)
 - [assets/glb/animals.glb](assets/glb/animals.glb)
 - [assets/glb/fan.glb](assets/glb/fan.glb)
 - [assets/glb/room.glb](assets/glb/room.glb)
 
-### avater-view.zip の展開
+### aveterView.zip の展開
 
-ダウンロードした avater-view.zip を展開してください。
+ダウンロードした aveterView.zip を展開してください。
 
 次のようなファイルが入っています。
 
@@ -39,7 +39,7 @@
 ```
 ./
 └── practice
-    └── avater-view
+    └── aveterView
         ├── assets
         │   ├── css
         │   │   └── style.css
@@ -48,7 +48,7 @@
         │   │   ├── fan.glb
         │   │   └── room.glb
         │   └── js
-        │       ├── avater-view
+        │       ├── aveterView
         │       │   ├── config.js
         │       │   ├── index.js
         │       │   └── objects
@@ -68,7 +68,7 @@
 
 次のファイルはダウンロードしたものを配置します
 
-- assets/js/avater-view 以下に avater-view.zip の展開したファイルを配置
+- assets/js/aveterView 以下に aveterView.zip の展開したファイルを配置
 - assets/glb 以下に ダウンロードした glb ファイルを配置
 
 # CGの表示
@@ -154,7 +154,7 @@ body {
 ## `assets/js/main.js`
 
 ```js
-import AvaterView from './avater-view/index.js'
+import AvaterView from './aveterView/index.js'
 
 const container = document.getElementById('avater')
 
@@ -167,7 +167,7 @@ new AvaterView({
 
 ```
 
-- `avater-view/index.js` を読み込み、`AvaterView` クラスを利用しています。
+- `aveterView/index.js` を読み込み、`AvaterView` クラスを利用しています。
 - `#avater` 要素を取得し、`AvaterView` クラスのインスタンスを生成しています。
 - 3Dモデルの glb ファイルの URLを指定しています。
 
@@ -186,7 +186,7 @@ new AvaterView({
 ## `main.js`
 
 ```js
-import AvaterView from './avater-view/index.js'
+import AvaterView from './aveterView/index.js'
 
 const container = document.getElementById('avater')
 
@@ -224,7 +224,7 @@ AvaterViewクラスの changeAnimalMotion メソッドを使って動物のモ�
 ## `main.js`
 
 ```js
-import AvaterView from './avater-view/index.js'
+import AvaterView from './aveterView/index.js'
 
 const container = document.getElementById('avater')
 
@@ -266,7 +266,7 @@ view.addEventListener('animal-click', () => {
 
 ```js
 
-import AvaterView from './avater-view/index.js'
+import AvaterView from './aveterView/index.js'
 
 const container = document.getElementById('avater')
 

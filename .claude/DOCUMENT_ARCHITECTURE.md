@@ -116,7 +116,7 @@ simulation-game-handson-2026/
 │   │   ├── 3-dialog/
 │   │   ├── 4-set-timeout/
 │   │   ├── 5-async/
-│   │   └── 6-avater-view/
+│   │   └── 6-aveterView/
 │   ├── 2-ui/                         # 第2章: UI構築
 │   │   ├── README.md
 │   │   ├── 1-view/

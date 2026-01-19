@@ -38,7 +38,7 @@ app/
     └── js/
         ├── main.js
         ├── avater.js
-        └── avater-view/
+        └── aveterView/
 ```
 
 ## 作業
@@ -54,7 +54,7 @@ app/
 ファイル名: `app/assets/js/menu.js`
 
 ```javascript
-export const root = document.getElementById('menu')
+const root = document.getElementById('menu')
 export const teachButton = document.getElementById('teachButton')
 export const talkButton = document.getElementById('talkButton')
 
@@ -281,7 +281,7 @@ app/
         ├── speaker.js
         ├── inputWordDialog.js
         ├── selectWordCategoryDialog.js
-        └── avater-view/
+        └── aveterView/
 ```
 
 ---
@@ -895,7 +895,7 @@ app/
         ├── inputWordDialog.js
         ├── selectWordCategoryDialog.js
         ├── storage.js
-        └── avater-view/
+        └── aveterView/
 ```
 
 ---

@@ -1,4 +1,4 @@
-import AvaterView from './avater-view/index.js'
+import AvaterView from './aveterView/index.js'
 
 const container = document.getElementById('avater')
 

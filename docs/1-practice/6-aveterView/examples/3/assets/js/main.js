@@ -1,4 +1,4 @@
-import AvaterView from './avater-view/index.js'
+import AvaterView from './aveterView/index.js'
 
 const container = document.getElementById('avater')
 
@@ -14,5 +14,5 @@ view.addEventListener('load', () => {
 })
 
 view.addEventListener('animal-click', () => {
-  view.changeAnimalMotion('attack')
+  console.log('動物がクリックされました')
 })
