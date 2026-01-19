@@ -20,7 +20,7 @@ menu.talkButton.addEventListener('click', async () => {
   const word = words[Math.floor(Math.random() * words.length)]
   const categoryTemplates = templates.filter(template => template.category == word.category)
   const template = categoryTemplates[Math.floor(Math.random() * categoryTemplates.length)]
-  const message = template.content.replace('{言葉}', word.word)
+  const message = template.content.replace('{言葉}', word.content)
 
   avater.view.changeAnimalMotion(template.motion)
   await speaker.start(message)

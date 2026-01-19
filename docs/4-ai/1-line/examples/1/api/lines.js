@@ -18,7 +18,7 @@ export async function POST() {
 
   // 言葉のカテゴリに合致するテンプレートをフィルタ
   const categoryTemplates = templates.filter(
-    template => template.word_category_id == word.word_category_id
+    template => template.word_category_id == word.content_category_id
   )
 
   // ランダムにテンプレートを選択

@@ -9,22 +9,22 @@ const words = []
 const categories = ['あいさつ', '食べ物', '必殺技', '場所']
 
 const templates = [
-  { content: `おはようからおやすみまで「{言葉}」でお送りしています`, category: 'あいさつ' },
-  { content: `第一声が「{言葉}」？それもう様式美でしょ`, category: 'あいさつ' },
-  { content: `今日も元気に「{言葉}」していこうな`, category: 'あいさつ' },
-  { content: `とりあえず「{言葉}」って言っとけば場は持つ`, category: 'あいさつ' },
-  { content: `{言葉}味、想像したら負けなやつ`, category: '食べ物' },
-  { content: `公式がやりそうでやらない「{言葉}」味`, category: '食べ物' },
-  { content: `見た目はアレだけど味は普通の「{言葉}」`, category: '食べ物' },
-  { content: `SNSで炎上しそうな「{言葉}」フード`, category: '食べ物' },
-  { content: `必殺技「{言葉}」発動！（なお効果は未確認）`, category: '必殺技' },
-  { content: `相手は「{言葉}」を理解できなかった`, category: '必殺技' },
-  { content: `伝説の技「{言葉}」※再現性なし`, category: '必殺技' },
-  { content: `強そうに見えるだけの必殺技「{言葉}」`, category: '必殺技' },
-  { content: `だいたいみんな一度は通る「{言葉}」`, category: '場所' },
-  { content: `地図に載ってないけど有名な「{言葉}」`, category: '場所' },
-  { content: `行くとだいたい迷う「{言葉}」`, category: '場所' },
-  { content: `なぜか語られがちな場所「{言葉}」`, category: '場所' },
+  { content: 'おはようからおやすみまで「{言葉}」でお送りしています', category: 'あいさつ' },
+  { content: '第一声が「{言葉}」？それもう様式美でしょ', category: 'あいさつ' },
+  { content: '今日も元気に「{言葉}」していこうな', category: 'あいさつ' },
+  { content: 'とりあえず「{言葉}」って言っとけば場は持つ', category: 'あいさつ' },
+  { content: '{言葉}味、想像したら負けなやつ', category: '食べ物' },
+  { content: '公式がやりそうでやらない「{言葉}」味', category: '食べ物' },
+  { content: '見た目はアレだけど味は普通の「{言葉}」', category: '食べ物' },
+  { content: 'SNSで炎上しそうな「{言葉}」フード', category: '食べ物' },
+  { content: '必殺技「{言葉}」発動！（なお効果は未確認）', category: '必殺技' },
+  { content: '相手は「{言葉}」を理解できなかった', category: '必殺技' },
+  { content: '伝説の技「{言葉}」※再現性なし', category: '必殺技' },
+  { content: '強そうに見えるだけの必殺技「{言葉}」', category: '必殺技' },
+  { content: 'だいたいみんな一度は通る「{言葉}」', category: '場所' },
+  { content: '地図に載ってないけど有名な「{言葉}」', category: '場所' },
+  { content: '行くとだいたい迷う「{言葉}」', category: '場所' },
+  { content: 'なぜか語られがちな場所「{言葉}」', category: '場所' },
 ]
 
 avater.view.addEventListener('animal-click', () => {
@@ -38,7 +38,7 @@ menu.talkButton.addEventListener('click', () => {
   const word = words[Math.floor(Math.random() * words.length)]
   const categoryTemplates = templates.filter(template => template.category == word.category)
   const template = categoryTemplates[Math.floor(Math.random() * categoryTemplates.length)]
-  const message = template.content.replace('{言葉}', word.word)
+  const message = template.content.replace('{言葉}', word.content)
 
   speaker.start(message)
 })
