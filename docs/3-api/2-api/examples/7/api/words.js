@@ -7,11 +7,11 @@ export async function GET() {
   ]))
 }
 
-export async function POST(request) {
-  const content = await request.json()
-  console.log('新しい言葉を受け取りました:', word)
+export async function POST(req) {
+  const data = await req.json()
+  console.log('新しい言葉を受け取りました:', data)
 
   // TODO: データベースに保存する処理
 
-  return new Response(JSON.stringify({ id: 5, ...word }))
+  return new Response(JSON.stringify({ id: 5, ...data }), { status: 201 })
 }

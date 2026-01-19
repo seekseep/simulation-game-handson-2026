@@ -19,7 +19,7 @@ async function main () {
     menu.close()
 
     const word = words[Math.floor(Math.random() * words.length)]
-    const categoryTemplates = templates.filter(template => template.wordCategoryId == word.contentCategoryId)
+    const categoryTemplates = templates.filter(template => template.wordCategoryId == word.wordCategoryId)
     const template = categoryTemplates[Math.floor(Math.random() * categoryTemplates.length)]
     const message = template.content.replace('{言葉}', word.content)
 

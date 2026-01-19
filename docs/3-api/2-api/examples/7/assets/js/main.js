@@ -19,7 +19,7 @@ async function main () {
     menu.close()
 
     const word = words[Math.floor(Math.random() * words.length)]
-    const categoryTemplates = templates.filter(template => template.wordCategoryId == word.contentCategoryId)
+    const categoryTemplates = templates.filter(template => template.wordCategoryId == word.wordCategoryId)
     const template = categoryTemplates[Math.floor(Math.random() * categoryTemplates.length)]
     const message = template.content.replace('{言葉}', word.content)
 
@@ -42,7 +42,7 @@ async function main () {
 
     await speaker.start(`「${wordCategory.name}」の分野を選びました`)
 
-    const newWord = { word, wordCategoryId: wordCategory.id }
+    const newWord = { content, wordCategoryId: wordCategory.id }
     await storage.addWord(newWord)
 
     words.push(newWord)
