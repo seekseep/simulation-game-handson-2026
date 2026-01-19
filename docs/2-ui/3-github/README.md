@@ -2,337 +2,231 @@
 
 この節では、作成したアプリケーションをGitHubにアップロードします。GitHubはコードのバージョン管理とホスティングのためのサービスです。
 
-## 学習内容
+# Git
 
-- GitHubアカウントの作成
-- リモートリポジトリの作成
-- Gitの基本操作（init, add, commit, push）
-- .gitignoreファイルの作成
+Git はバージョン管理システムです。
 
-## 前提条件
+## コミット
 
-- Gitがインストールされていること
-- コマンドラインツール（ターミナルまたはコマンドプロンプト）が使えること
+コミットはプログラムコードの状態を保存できます。また、コミットの時点に戻すこともできます。
+ゲームのセーブのようなイメージです。
 
----
-
-# ステップ1: GitHubアカウントの作成
-
-## 目標
-
-GitHubアカウントを作成します。
-
-## 手順
-
-1. **GitHubのウェブサイトにアクセス**
-   - https://github.com にアクセスします
-
-2. **サインアップ**
-   - 「Sign up」ボタンをクリック
-   - メールアドレスを入力
-   - パスワードを設定
-   - ユーザー名を決める
-   - メール認証を完了
-
-3. **プランの選択**
-   - 無料プラン（Free）を選択
-
-**注意:** すでにGitHubアカウントを持っている場合は、このステップをスキップしてください。
-
----
-
-# ステップ2: リモートリポジトリの作成
-
-## 目標
-
-GitHubにリポジトリ（コードを保存する場所）を作成します。
-
-## 手順
-
-1. **GitHubにログイン**
-   - https://github.com にアクセスしてログイン
-
-2. **新しいリポジトリを作成**
-   - 右上の「+」ボタンをクリック
-   - 「New repository」を選択
-
-3. **リポジトリの設定**
-   - **Repository name**: `simulation-game` (または任意の名前)
-   - **Description**: 「シミュレーションゲーム - 単語を教えると話してくれる動物」(任意)
-   - **Public / Private**: どちらでも良い（Publicにすると誰でも見れます）
-   - **Add a README file**: チェックを**入れない**
-   - **Add .gitignore**: 「None」を選択
-   - **Choose a license**: 「None」を選択（後で追加できます）
-
-4. **Create repository をクリック**
-
-5. **リポジトリのURLをメモ**
-   - 作成後の画面に表示されるURL（例: `https://github.com/your-username/simulation-game.git`）をメモしておきます
-
----
-
-# ステップ3: ローカルリポジトリの作成
-
-## 目標
-
-自分のパソコン上でGitリポジトリを初期化し、GitHubにプッシュします。
-
-## 作業前のディレクトリ構造
-
-```
-app/
-├── index.html
-└── assets/
-    ├── css/
-    ├── glb/
-    └── js/
+```mermaid
+graph LR;
+    A[コミット1] --> B[コミット2];
+    B --> C[コミット3];
+    C --> D[コミット4];
 ```
 
-## 手順
+## ブランチ
 
-### 1. .gitignoreファイルを作成
+特定の時点でコードを分岐させることができます。
 
-GitHubにアップロードしないファイルを指定します。
-
-ファイル名: `app/.gitignore`
-
-```
-# macOS
-.DS_Store
-
-# Windows
-Thumbs.db
-
-# エディタ
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# ログファイル
-*.log
-
-# 一時ファイル
-.tmp/
-temp/
+```mermaid
+graph LR;
+    A[コミット1] --> B[コミット2];
+    B --> C[コミット3];
+    B --> D[コミット4];
+    D --> E[コミット5];
 ```
 
-**説明:**
+## マージ
 
-- `.gitignore` - Gitが無視するファイルやディレクトリを指定
-- macOSやWindows、エディタが自動生成するファイルを除外します
+分岐したコードを統合することができます。
 
-### 2. Gitリポジトリを初期化
-
-ターミナルで `app` ディレクトリに移動します。
-
-```bash
-cd app
+```mermaid
+graph LR;
+    A[コミット1] --> B[コミット2];
+    B --> C[コミット3];
+    B --> D[コミット4];
+    D --> E[コミット5];
+    C --> F[コミット6];
+    E --> F;
 ```
 
-Gitリポジトリを初期化します。
+## 分散作業
 
-```bash
-git init
-```
+ブランチで分岐したコードをそれぞれの開発者がローカルで編集し、後でマージすることができます。
 
-**実行結果:**
+これによって複数人が同時に作業することが可能になります。
 
-```
-Initialized empty Git repository in /path/to/app/.git/
-```
+## ベアリポジトリ
 
-### 3. ファイルをステージングエリアに追加
+Git ではそれぞれのパソコンの上にリポジトリを作成し、変更履歴を管理します。
+その変更を共有するために、中央にベアリポジトリ（bare repository）を作成します。
 
-すべてのファイルをステージングエリアに追加します。
+作業者のパソコンの上にあるリポジトリをローカルリポジトリと呼びます。
 
-```bash
-git add .
-```
-
-**説明:**
-
-- `git add .` - カレントディレクトリのすべてのファイルを追加
-- `.gitignore`に記載されたファイルは除外されます
-
-### 4. 最初のコミットを作成
-
-変更をコミット（記録）します。
-
-```bash
-git commit -m "Initial commit: シミュレーションゲームの基本実装"
-```
-
-**説明:**
-
-- `git commit` - 変更を記録
-- `-m "メッセージ"` - コミットメッセージを指定
-
-### 5. デフォルトブランチ名を設定
-
-デフォルトのブランチ名を `main` に設定します。
-
-```bash
-git branch -M main
-```
-
-**説明:**
-
-- GitHubのデフォルトブランチは `main` ですが、古いGitでは `master` になっている場合があります
-- このコマンドで統一します
-
-### 6. リモートリポジトリを追加
-
-GitHubのリポジトリをリモートとして追加します。
-
-```bash
-git remote add origin https://github.com/your-username/simulation-game.git
-```
-
-**注意:** `your-username` と `simulation-game` は自分のユーザー名とリポジトリ名に置き換えてください。
-
-**説明:**
-
-- `git remote add` - リモートリポジトリを追加
-- `origin` - リモートリポジトリの名前（慣習的に `origin` を使います）
-
-### 7. GitHubにプッシュ
-
-コミットをGitHubにアップロードします。
-
-```bash
-git push -u origin main
-```
-
-**認証:**
-
-初回実行時は、GitHubのユーザー名とパスワード（または個人アクセストークン）を求められます。
-
-**説明:**
-
-- `git push` - リモートリポジトリにアップロード
-- `-u origin main` - `origin` の `main` ブランチにプッシュし、今後のデフォルトとして設定
-
-**実行結果:**
+```mermaid
+graph LR
+    A[(開発者1のリポジトリ)] --> B[(ベアリポジトリ)]
+    C[(開発者2のリポジトリ)] --> B
+    D[(開発者3のリポジトリ)] --> B
 
 ```
-Enumerating objects: 25, done.
-Counting objects: 100% (25/25), done.
-Delta compression using up to 8 threads
-Compressing objects: 100% (20/20), done.
-Writing objects: 100% (25/25), 150.00 KiB | 15.00 MiB/s, done.
-Total 25 (delta 2), reused 0 (delta 0), pack-reused 0
-To https://github.com/your-username/simulation-game.git
- * [new branch]      main -> main
-Branch 'main' set up to track remote branch 'main' from 'origin'.
+
+## プッシュ
+
+ローカルリポジトリの変更をベアリポジトリに送信することをプッシュ（push）と呼びます。
+
+```mermaid
+graph LR
+    A[(開発者のリポジトリ)] --プッシュ--> B[(ベアリポジトリ)]
 ```
 
-## 動作確認
+## プル
 
-1. **GitHubでリポジトリを確認**
-   - ブラウザで自分のGitHubリポジトリにアクセス
-   - ファイルがアップロードされていることを確認
+ベアリポジトリの変更をローカルリポジトリに取得することをプル（pull）と呼びます。
 
-2. **コミット履歴を確認**
-   - GitHubのリポジトリページで「commits」をクリック
-   - 「Initial commit: シミュレーションゲームの基本実装」が表示される
-
-## 作業後のディレクトリ構造
-
-```
-app/
-├── .git/          (新規作成 - Gitの管理情報)
-├── .gitignore     (新規作成)
-├── index.html
-└── assets/
-    ├── css/
-    ├── glb/
-    └── js/
+```mermaid
+graph RL
+    B[(ベアリポジトリ)] --プル--> A[(開発者のリポジトリ)]
 ```
 
----
+## クローン
 
-# 今後の更新方法
+ベアリポジトリの内容をローカルリポジトリにコピーすることをクローン（clone）と呼びます。
 
-コードを変更した後、GitHubに反映する手順です。
+プルの場合は、すでにローカルリポジトリが存在している場合に使用しますが、クローンはローカルリポジトリが存在しない場合に使用します。
 
-## 手順
-
-1. **変更をステージングエリアに追加**
-
-```bash
-git add .
+```mermaid
+graph RL
+    B[(ベアリポジトリ)] --クローン--> A[(開発者のリポジトリ)]
 ```
 
-2. **コミットを作成**
+# GitHub
 
-```bash
-git commit -m "変更内容の説明"
-```
+GitHub 上にリモートリポジトリを用意してそこにここまで作ったアプリケーションをプッシュします。これによってプログラムを他者に公開することができます。
 
-例:
-```bash
-git commit -m "セリフ表示のアニメーション速度を調整"
-```
+## GitHubアカウントの作成
 
-3. **GitHubにプッシュ**
+GitHubを利用するためには、まずアカウントを作成する必要があります。以下の手順に従ってください。
+また、アカウントを作成するためにはメールアドレスが必要です。あるいは、GoogleアカウントやApple IDを使用してサインアップすることもできます。
 
-```bash
-git push
-```
+https://github.com/signup にアクセスし、アカウントを作成します。
 
-**ヒント:**
+![GitHubのアカウントの作成](assets/github-signup.png)
 
-- コミットメッセージは、何を変更したかが分かるように具体的に書きましょう
-- 小さな変更ごとにコミットする習慣をつけると、後で変更履歴を追いやすくなります
+## ログインの確認
 
----
+https://github.com/login にアクセスし、作成したアカウントでログインできることを確認します。
 
-# よくあるエラーと対処法
+![Githubへのログイン](assets/github-login.png)
 
-## エラー1: `git: command not found`
+## ログインの成功
 
-**原因:** Gitがインストールされていません。
+ログインに成功すると、GitHubのダッシュボードが表示されます。
 
-**対処法:**
-- Windows: https://git-scm.com/ からGitをダウンロードしてインストール
-- macOS: `brew install git` (Homebrewがインストールされている場合)
-- Linux: `sudo apt-get install git` (Ubuntuの場合)
+![Github ホーム](assets/github-home.png)
 
-## エラー2: `Permission denied (publickey)`
+# リポジトリの作成
 
-**原因:** SSH認証が設定されていません。
+新しいリポジトリを作成するには、右上の「+」アイコンをクリックし、「New repository」を選択します。
 
-**対処法:**
-- HTTPSのURLを使う（`https://github.com/...`）
-- または、SSHキーをGitHubに登録する（GitHubのドキュメントを参照）
+![新しいリポジトリ](assets/github-new-repository-menu-item.png)
 
-## エラー3: `fatal: remote origin already exists`
+## リポジトリの設定
 
-**原因:** すでにリモートリポジトリが追加されています。
+リポジトリの設定を行います。基本的には初期値で問題ありません。
 
-**対処法:**
-```bash
-git remote remove origin
-git remote add origin https://github.com/your-username/simulation-game.git
-```
+`Repository name` にリポジトリの名前を入力します。任意の名前を付けることができます。
+今回は「simulation-game-handson-2026」とします。
+
+`Choose visibility` はリポジトリを公開するか非公開にするかを選択します。
+特に問題ない場合は今回は「Public」を選択します。
+
+最後に画面最下部の緑色の「Create repository」ボタンをクリックします。
+
+![リポジトリの設定](assets/github-repository-configuration.png)
+
+## 空のリポジトリ
+
+リポジトリが作成されると、空のリポジトリの状態が表示されます。
+
+![空のリポジトリ](assets/github-empty-repository.png)
+
+# ローカルリポジトリの用意
+
+ここまで作っていた `app` ディレクトリをローカルリポジトリとして初期化します。
+
+## `app` ディレクトリを開く
+
+新しく Visual Studio Code を起動します。
+![Visual Studio Code の起動画面](assets/vscode-empty.png)
+
+フォルダーを開くから `app` ディレクトリを開きます。
+![フォルダーを開くダイアログ](assets/vscode-empty-open-folder.png)
+
+app が開けると次のように表示されます。
+![app フォルダーを開いた状態](assets/vscode-opened-app-folder.png)
+
+## Git 機能の表示
+
+サイドバーを右クリックして「ソース管理」を選択します。
+
+![サイドバーからソース管理を表示](assets/vscode-version-feature.gif)
+
+あるいは、メニューバーの「表示」から「ソース管理」を選択します。
+
+![メニューバーからソース管理を表示](assets/vscode-version-feature-from-menu-bar.gif)
+
+画面サブにソース管理が表示できれば成功です。
+
+
+## リポジトリの初期化
+
+ソース管理のリポジトリを初期化するボタンをクリックします。
+これでローカルリポジトリが用意できました。
+
+![初期化されたリポジトリ](assets/vscode-initialized-repository.png)
+
+## コミット
+
+まだ何もコミットされていないので次の手順でコミットをします。
+
+グラフという欄にコミットが表示されれば成功です。
+
+![コミットの作成手順](assets/vscode-commit.gif)
+
+## リモートリポジトリの追加
+
+### GitHub アカウントとの紐づけ
+
+このローカルリポジトリに先程作成したGitHub上のリモートリポジトリを追加します。
+
+VSCode がブラウザから GitHub に接続することを要求してくるので許可します。
+
+![リモートリポジトリへの接続手順](assets/vscode-connect-repository.gif)
+
+GitHubアカウントとの連携を許可します。
+![VSCode の GitHub 連携許可画面](assets/github-authorize-vscode.png)
+
+### リポジトリの選択
+
+一覧が表示されるので先程作成したリポジトリを選択します。
+
+![リモートリポジトリ名の入力](assets/vscode-input-remote-name.png)
+
+## プッシュ
+
+ソース管理機能からプッシュを選びます。
+
+![プッシュの実行](assets/vscode-push.png)
+
+![リモートブランチの作成確認](assets/vscode-create-remote-branch.png)
+
+## リモートリポジトリの確認
+
+リポジトリがプッシュできると次のように表示されます。
+
+![プッシュ後の GitHub リポジトリ](assets/github-pushed-repository.png)
 
 ---
 
 # まとめ
 
-この節では、GitHubにアプリケーションをアップロードしました。
-
-**学んだこと:**
-
-1. **GitHubアカウントの作成**: コードを保存するためのアカウント
-2. **リモートリポジトリの作成**: GitHubにコードを保存する場所を作成
-3. **Gitの基本操作**: init, add, commit, push
-4. **.gitignore**: 不要なファイルを除外
-
-次の節では、Vercelを使ってアプリケーションをインターネット上に公開します。
+この節では、GitとGitHubの基本的な概念を学び、作成したアプリケーションをGitHubにアップロードしました。これにより、コードのバージョン管理と共有が可能になりました。
 
 # 次の項
 
-[4. Vercelデプロイ](../4-vercel/README.md)
+[Vercelへのデプロイ](../4-deploy/README.md)
