@@ -5,7 +5,8 @@
       "Bash(tree:*)",
       "Bash(done)",
       "Bash(grep:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(find:*)"
     ]
   }
 }

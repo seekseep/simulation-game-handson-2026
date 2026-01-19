@@ -46,6 +46,8 @@ console.log("console.logでデバッグできます")
 
 ![1の結果](../2-debug/assets/screenshot-1.png)
 
+実装例: [examples/1](./examples/1)
+
 ### デベロッパーツールの開き方
 
 ブラウザとOSによって異なります。次のリンクを参照してください。
@@ -72,6 +74,8 @@ console.debug("詳細なデバッグ情報を出力（log と似ているが、�
 次のように表示されます。
 
 ![2の結果](assets/screenshot-2.png)
+
+実装例: [examples/2](./examples/2)
 
 #　いろんなログの出し方
 
@@ -108,6 +112,8 @@ console.groupEnd("ユーザー情報")
 次のように表示されます。
 
 ![3の結果](assets/screenshot-3.png)
+
+実装例: [examples/3](./examples/3)
 
 # 複雑なロジックを追いかける
 
@@ -160,6 +166,8 @@ console.log(numbers)
 
 ![4の結果](assets/screenshot-4.png)
 
+実装例: [examples/4](./examples/4)
+
 # `debugger` を使ったデバッグ
 
 さらに特定の状態のときに処理を一時停止して状態を確認したい場合があります。
@@ -197,6 +205,8 @@ console.log(numbers)
 
 これらのボタンを押すことで処理を進めることができます。
 ![デバッガーの操作](assets/screenshot-5-3.png)
+
+実装例: [examples/5](./examples/5)
 
 ---
 

@@ -57,6 +57,8 @@
 
 ![1-1の結果](assets/screenshot-1-1.png)
 
+実装例: [examples/1-1](./examples/1-1)
+
 ---
 
 # 絶対配置
@@ -100,6 +102,8 @@
 ウィンドウの大きさを変更しても右下に表示されることを確認してください。
 
 ![1-2の結果](assets/screenshot-1-2.png)
+
+実装例: [examples/1-2](./examples/1-2)
 
 ---
 
@@ -189,6 +193,8 @@
 画面の大きさを変えたときもそれぞれが角に表示されることを確認してください。
 
 ![2の結果](assets/screenshot-2.png)
+
+実装例: [examples/2](./examples/2)
 
 ---
 
@@ -283,6 +289,8 @@
 
 ![3の結果](assets/screenshot-3-1-2.png)
 
+実装例: [examples/3-1](./examples/3-1)
+
 ## `box-sizing`
 
 box-sizing プロパティを使って、要素の幅と高さの計算方法を変更します。
@@ -345,6 +353,8 @@ https://developer.mozilla.org/ja/docs/Web/CSS/Reference/Properties/box-sizing
 `box-sizing: border-box;` を追加したことで、要素の幅と高さの計算方法が変わり、重なりがなくなります。
 
 ![3の結果](assets/screenshot-3-2.png)
+
+実装例: [examples/3-2](./examples/3-2)
 
 # まとめ
 

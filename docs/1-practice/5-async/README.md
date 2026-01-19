@@ -64,6 +64,8 @@ greetingButton.addEventListener("click", () => {
 
 ![1-1の結果](assets/demo-1-1.gif)
 
+実装例: [examples/1-1](./examples/1-1)
+
 ---
 
 # 関数化
@@ -113,6 +115,8 @@ greetingButton.addEventListener("click", () => {
 ボタンをクリックすると1秒後に「こんにちは, たろう!」が表示されます。
 
 ![1-2の結果](assets/demo-1-2.gif)
+
+実装例: [examples/1-2](./examples/1-2)
 
 ---
 
@@ -164,6 +168,8 @@ greetingButton.addEventListener("click", () => {
 ボタンをクリックすると、1秒後に「こんにちは, たろう!」、2秒後に「こんにちは, じろう!」が表示されます。
 
 ![1-3の結果](assets/demo-1-3.gif)
+
+実装例: [examples/1-3](./examples/1-3)
 
 ---
 
@@ -231,6 +237,8 @@ greetingButton.addEventListener("click", () => {
 ボタンをクリックすると、1秒ごとに順番に挨拶が表示されます。
 
 ![1-4の結果](assets/demo-1-4.gif)
+
+実装例: [examples/1-4](./examples/1-4)
 
 ---
 
@@ -305,6 +313,8 @@ greetingButton.addEventListener("click", async () => {
 
 ![1-5の結果](assets/demo-1-5.gif)
 
+実装例: [examples/1-5](./examples/1-5)
+
 ---
 
 # Promise の基礎
@@ -350,6 +360,8 @@ new Promise(() => {
 `[1] Promiseの処理が実行されます` と表示されます。
 
 ![2-1の結果](assets/demo-2-1.gif)
+
+実装例: [examples/2-1](./examples/2-1)
 
 ---
 
@@ -397,6 +409,8 @@ promise.then(() => {
 2. `[2] Promiseの処理が完了しました`
 
 ![2-2の結果](assets/demo-2-2.gif)
+
+実装例: [examples/2-2](./examples/2-2)
 
 ---
 
@@ -447,6 +461,8 @@ promise.then(() => {
 3. `[3] Promiseの処理が完了しました` （1秒後）
 
 ![2-3の結果](assets/demo-2-3.gif)
+
+実装例: [examples/2-3](./examples/2-3)
 
 ---
 
@@ -500,6 +516,8 @@ promise.then((date) => {
 
 ![2-4の結果](assets/demo-2-4.gif)
 
+実装例: [examples/2-4](./examples/2-4)
+
 ---
 
 # async/await で Promise を扱う
@@ -551,6 +569,8 @@ main()
 前のセクションと同じ順番でログが表示されますが、コードがより読みやすくなっています。
 
 ![2-5の結果](assets/demo-2-5.gif)
+
+実装例: [examples/2-5](./examples/2-5)
 
 ---
 
@@ -607,6 +627,8 @@ main()
 
 ![2-6の結果](assets/demo-2-6.gif)
 
+実装例: [examples/2-6](./examples/2-6)
+
 ---
 
 # Promise を返す関数の簡潔な使い方
@@ -659,6 +681,8 @@ main()
 前のセクションと同じ動作をします。
 
 ![2-7の結果](assets/demo-2-7.gif)
+
+実装例: [examples/2-7](./examples/2-7)
 
 ---
 
@@ -733,6 +757,8 @@ openButton.addEventListener("click", () => {
 
 ![3-1の結果](assets/demo-3-1.gif)
 
+実装例: [examples/3-1](./examples/3-1)
+
 ---
 
 # Promise を使ったダイアログ
@@ -795,6 +821,8 @@ openButton.addEventListener("click", async () => {
 ボタンをクリックしてダイアログを開き、名前を入力して確定すると結果が表示されます。
 
 ![3-2の結果](assets/demo-3-2.gif)
+
+実装例: [examples/3-2](./examples/3-2)
 
 ---
 

@@ -49,6 +49,8 @@
 
 ![1の結果](assets/screenshot-1.png)
 
+実装例: [examples/1](./examples/1)
+
 # ダイアログを開く
 
 ## `index.html`
@@ -83,6 +85,8 @@ dialog.showModal();
 ブラウザで `index.html` を開いてください。
 
 ![2の結果](assets/screenshot-2.png)
+
+実装例: [examples/2](./examples/2)
 
 # ボタンを押してダイアログを開く
 
@@ -126,6 +130,8 @@ openButton.addEventListener("click", () => {
 ボタンを押すことでダイアログが表示されます。
 
 ![3の結果](assets/demo-3.gif)
+
+実装例: [examples/3](./examples/3)
 
 # ダイアログを閉じる
 
@@ -176,6 +182,8 @@ closeButton.addEventListener("click", () => {
 ボタンを押すことでダイアログが表示され、閉じるボタンを押すことでダイアログが閉じます。
 
 ![4の結果](assets/demo-4.gif)
+
+実装例: [examples/4](./examples/4)
 
 # ダイアログで入力した値を受け取る
 
@@ -242,6 +250,8 @@ submitButton.addEventListener("click", () => {
 名前を入力して確定ボタンを押すと、ダイアログが閉じて結果が表示されます。
 
 ![5の結果](assets/demo-5.gif)
+
+実装例: [examples/5](./examples/5)
 
 ---
 

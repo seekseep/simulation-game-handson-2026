@@ -177,6 +177,8 @@ new AvaterView({
 
 ![1の結果](assets/screenshot-1.png)
 
+実装例: [examples/1](./examples/1)
+
 # 動物を表示する
 
 次にこの部屋に動物を表示させます。
@@ -212,6 +214,8 @@ AvaterViewクラスの changeAnimalMotion メソッドを使って動物のモ�
 動物が表示されます。
 
 ![2の結果](./assets/demo-2.gif)
+
+実装例: [examples/2](./examples/2)
 
 # 動物がクリックされたときの制御
 
@@ -250,6 +254,8 @@ view.addEventListener('animal-click', () => {
 動物をクリックするとコンソールにメッセージが表示されます。
 
 ![3の結果](./assets/demo-3.gif)
+
+実装例: [examples/3](./examples/3)
 
 
 # 動物のモーションを変更する
@@ -291,6 +297,13 @@ view.addEventListener('animal-click', () => {
 - `'confused'`
 - `'damaged'`
 - `'shifty'`
+
+## 動作確認
+
+`index.html` をブラウザで開いてください。
+動物をクリックすると、動物が攻撃モーションを行います。
+
+実装例: [examples/4](./examples/4)
 
 ---
 

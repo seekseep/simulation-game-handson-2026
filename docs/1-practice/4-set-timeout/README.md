@@ -49,6 +49,8 @@
 
 ![1-1の結果](assets/screenshot-1-1.png)
 
+実装例: [examples/1-1](./examples/1-1)
+
 # 犬を表示する
 
 ## `index.html`
@@ -89,6 +91,8 @@ button.addEventListener("click", () => {
 
 ![1-2の結果](assets/demo-1-2.gif)
 
+実装例: [examples/1-2](./examples/1-2)
+
 # 時間を開けて犬を表示する
 
 次に、ボタンを押してから 1秒後に犬の絵文字が表示されるようにします。
@@ -116,6 +120,8 @@ button.addEventListener("click", () => {
 ボタンをクリックしてから 1 秒後に犬の絵文字が表示されます。
 
 ![1-3の結果](assets/demo-1-3.gif)
+
+実装例: [examples/1-3](./examples/1-3)
 
 # 犬が吠える
 
@@ -176,6 +182,8 @@ button.addEventListener("click", () => {
 
 ![2-1の結果](assets/demo-2-1.gif)
 
+実装例: [examples/2-1](./examples/2-1)
+
 #　効率的な書き方
 
 現在の実装方法だと絵文字の数が増えるためにコードが冗長になってしまいます。
@@ -213,6 +221,8 @@ button.addEventListener("click", () => {
 ボタンをクリックすると犬が吠えるアニメーションが表示されます。
 
 ![2-2の結果](assets/demo-2-2.gif)
+
+実装例: [examples/2-2](./examples/2-2)
 
 # 文字の長さに応じた実装
 
@@ -276,6 +286,8 @@ button.addEventListener("click", () => {
 
 ![2-3の結果](assets/demo-2-3.gif)
 
+実装例: [examples/2-3](./examples/2-3)
+
 # 文字を表示する
 
 絵文字でなく文字を表示することができます。
@@ -306,6 +318,8 @@ button.addEventListener("click", () => {
 ボタンをクリックすると犬が吠えるアニメーションが表示されます。
 
 ![2-4の結果](assets/demo-2-4.gif)
+
+実装例: [examples/2-4](./examples/2-4)
 
 ---
 
