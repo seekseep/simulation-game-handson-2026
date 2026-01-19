@@ -1,48 +1,328 @@
-# 5. 非同期処理
+# 非同期処理
 
-この節では、JavaScriptの非同期処理について学びます。非同期処理は、時間のかかる処理を待つ間も他の処理を続けられるようにする仕組みです。
+この節ではJavaScriptの非同期処理について学びます。
 
-## 学習内容
+プログラムを配置するためのディレクトリを作成します。
 
-- 非同期処理の基本概念
-- Promiseの使い方
-- async/awaitの使い方
-- 実際のUI操作での非同期処理の活用
+```
+./
+└── practice
+    └── async
+```
 
-## サンプル一覧
+# 非同期処理の基本
 
-1. [setTimeout の復習](#サンプル1-settimeout-の復習)
-2. [関数化して遅延後に挨拶](#サンプル2-関数化して遅延後に挨拶)
-3. [複数回呼び出し（固定の遅延）](#サンプル3-複数回呼び出し固定の遅延)
-4. [複数回呼び出し（ランダムな遅延）](#サンプル4-複数回呼び出しランダムな遅延)
-5. [Promiseで順番を制御](#サンプル5-promiseで順番を制御)
-6. [ダイアログをPromiseで扱う](#サンプル6-ダイアログをpromiseで扱う)
-7. [async/awaitで読みやすく](#サンプル7-asyncawaitで読みやすく)
+非同期処理は、処理が完了するまで待たずに次の処理を実行する仕組みです。
+`setTimeout` を使用して、遅延した処理を実行します。
+
+`practice/async/1` というディレクトリを作り、次のようにファイルを作成してください。
+
+```
+./
+└── practice
+    └── async
+        └── 1
+            ├── index.html
+            └── main.js
+```
+
+## `index.html`
+
+```html
+<html>
+  <body>
+    <button id="greetingButton">挨拶する</button>
+    <div id="result"></div>
+    <script src="main.js"></script>
+  </body>
+</html>
+```
+
+## `main.js`
+
+```js
+const greetingButton = document.getElementById("greetingButton")
+const result = document.getElementById("result")
+
+greetingButton.addEventListener("click", () => {
+  setTimeout(() => {
+    const greeting = document.createElement("div")
+    greeting.textContent = `こんにちは, たろう!`
+    result.appendChild(greeting)
+  }, 1000)
+})
+```
+
+- `setTimeout` を使用して、1秒後に挨拶を表示します。
+- `document.createElement` で新しい要素を作成し、`appendChild` で結果に追加します。
+
+## 動作確認
+
+ブラウザで `index.html` を開いてください。
+
+ボタンをクリックすると1秒後に「こんにちは, たろう!」が表示されます。
+
+![1-1の結果](assets/demo-1-1.gif)
 
 ---
 
-# サンプル1: setTimeout の復習
-実装例: `/examples/1`
+# 関数化
 
-## 目標
+遅延して挨拶を表示する処理を関数にまとめます。
 
-setTimeout の基本的な使い方を復習します。
-
-## 作業前のディレクトリ構造
+`practice/async/1` を引き続き使います。
 
 ```
-practice/
-└── 5-async/
+./
+└── practice
+    └── async
+        └── 1
+            ├── index.html
+            └── main.js
 ```
 
-## 作業
+## `main.js` の変更
 
-1. HTMLファイルを作成
-2. JavaScriptファイルを作成
+次のように `greetingWithDelay` 関数を追加してください。
 
-## 1. HTMLファイルを作成
+```js
+const greetingButton = document.getElementById("greetingButton")
+const result = document.getElementById("result")
 
-ファイル名: `practice/5-async/index.html`
+function greetingWithDelay(name, delay) {
+  setTimeout(() => {
+    const greeting = document.createElement("div")
+    greeting.textContent = `こんにちは, ${name}!`
+    result.appendChild(greeting)
+  }, delay)
+}
+
+greetingButton.addEventListener("click", () => {
+  greetingWithDelay("たろう", 1000)
+})
+```
+
+変更した箇所：
+- `greetingWithDelay` という関数を作成し、名前と遅延時間を引数として受け取ります。
+- この関数を使用することで、異なる名前と遅延時間で挨拶を表示できます。
+
+## 動作確認
+
+ブラウザで `index.html` を開いてください。
+
+ボタンをクリックすると1秒後に「こんにちは, たろう!」が表示されます。
+
+![1-2の結果](assets/demo-1-2.gif)
+
+---
+
+# 複数の非同期処理
+
+複数の非同期処理を実行します。
+
+`practice/async/1` を引き続き使います。
+
+```
+./
+└── practice
+    └── async
+        └── 1
+            ├── index.html
+            └── main.js
+```
+
+## `main.js` の変更
+
+`greetingWithDelay` の呼び出しを2つに増やしてください。
+
+```js
+const greetingButton = document.getElementById("greetingButton")
+const result = document.getElementById("result")
+
+function greetingWithDelay(name, delay) {
+  setTimeout(() => {
+    const greeting = document.createElement("div")
+    greeting.textContent = `こんにちは, ${name}!`
+    result.appendChild(greeting)
+  }, delay)
+}
+
+greetingButton.addEventListener("click", () => {
+  greetingWithDelay("たろう", 1000)
+  greetingWithDelay("じろう", 2000)
+})
+```
+
+変更した箇所：
+- 2つの `greetingWithDelay` を呼び出します。
+- 1秒後に「たろう」、2秒後に「じろう」が表示されます。
+
+## 動作確認
+
+ブラウザで `index.html` を開いてください。
+
+ボタンをクリックすると、1秒後に「こんにちは, たろう!」、2秒後に「こんにちは, じろう!」が表示されます。
+
+![1-3の結果](assets/demo-1-3.gif)
+
+---
+
+# さらに多くの非同期処理
+
+さらに多くの非同期処理を実行します。
+
+`practice/async/1` を引き続き使います。
+
+```
+./
+└── practice
+    └── async
+        └── 1
+            ├── index.html
+            └── main.js
+```
+
+## `main.js` の変更
+
+`greetingWithDelay` の呼び出しを5つに増やしてください。
+
+```js
+const greetingButton = document.getElementById("greetingButton")
+const result = document.getElementById("result")
+
+function greetingWithDelay(name, delay) {
+  setTimeout(() => {
+    const greeting = document.createElement("div")
+    greeting.textContent = `こんにちは, ${name}!`
+    result.appendChild(greeting)
+  }, delay)
+}
+
+greetingButton.addEventListener("click", () => {
+  greetingWithDelay("たろう", 1000)
+  greetingWithDelay("じろう", 2000)
+  greetingWithDelay("さぶろう", 3000)
+  greetingWithDelay("しろう", 4000)
+  greetingWithDelay("ごろう", 5000)
+})
+```
+
+変更した箇所：
+- 5つの `greetingWithDelay` を呼び出します。
+- 1秒ごとに順番に挨拶が表示されます。
+
+ここでは順番に表示することを期待するのでプログラムを書くときにそれが何番目かによって遅延時間を変えています。
+
+さぶろうへの挨拶がなくなったときに、しろうとごろうへの挨拶もずれてしまうことに注意してください。
+
+例:
+```js
+  greetingWithDelay("たろう", 1000)
+  greetingWithDelay("じろう", 2000)
+  // さぶろうへの挨拶がなくなった
+  greetingWithDelay("しろう", 3000) // 4000 -> 3000
+  greetingWithDelay("ごろう", 4000) // 5000 -> 4000
+```
+
+## 動作確認
+
+ブラウザで `index.html` を開いてください。
+
+ボタンをクリックすると、1秒ごとに順番に挨拶が表示されます。
+
+![1-4の結果](assets/demo-1-4.gif)
+
+---
+
+# async/await
+
+前のセクションの課題を解決するために、`async/await` を使用します。
+
+`async/await` を使用することで、前の処理が終わってから次の処理を実行することができます。
+
+`practice/async/1` を引き続き使います。
+
+```
+./
+└── practice
+    └── async
+        └── 1
+            ├── index.html
+            └── main.js
+```
+
+## `main.js` の変更
+
+`greetingWithDelay` 関数を Promise を返すように変更し、イベントリスナーを `async/await` を使って書き直してください。
+
+```js
+const greetingButton = document.getElementById("greetingButton")
+const result = document.getElementById("result")
+
+function greetingWithDelay(name, delay) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const greeting = document.createElement("div")
+      greeting.textContent = `こんにちは, ${name}!`
+      result.appendChild(greeting)
+      resolve()
+    }, delay)
+  })
+}
+
+greetingButton.addEventListener("click", async () => {
+  await greetingWithDelay("たろう", 1000)
+  await greetingWithDelay("じろう", 1000)
+  await greetingWithDelay("さぶろう", 1000)
+  await greetingWithDelay("しろう", 1000)
+  await greetingWithDelay("ごろう", 1000)
+})
+```
+
+変更した箇所：
+- `greetingWithDelay` 関数が `Promise` を返すようにしました。
+- イベントリスナーの関数に `async` キーワードを付けることで、その関数内で `await` を使用できます。
+- `await` は Promise が完了するまで待ちます。
+- これにより、前の処理が終わってから次の処理を実行できます。
+- 遅延時間をすべて 1000 ミリ秒に統一できるため、順番を変更しても遅延時間を変更する必要がありません。
+
+順番を入れ替えたり、挨拶を追加・削除したりしても問題なく動作します。
+
+例:
+```js
+  await greetingWithDelay("じろう", 1000)
+  await greetingWithDelay("たろう", 1000)
+  // さぶろうへの挨拶がなくなった
+  await greetingWithDelay("しろう", 1000)
+  await greetingWithDelay("ごろう", 1000)
+```
+
+## 動作確認
+
+ブラウザで `index.html` を開いてください。
+
+ボタンをクリックすると、1秒ごとに順番に挨拶が表示されます。
+
+![1-5の結果](assets/demo-1-5.gif)
+
+---
+
+# Promise の基礎
+
+`async/await` の内部で使われている Promise について、基礎から学びます。
+
+`practice/async/2` というディレクトリを作り、次のようにファイルを作成してください。
+
+```
+./
+└── practice
+    └── async
+        └── 2
+            ├── index.html
+            └── main.js
+```
+
+## `index.html`
 
 ```html
 <html>
@@ -52,314 +332,352 @@ practice/
 </html>
 ```
 
-基本的なHTMLファイルで、JavaScriptファイルを読み込みます。
+## `main.js`
 
-## 2. JavaScriptファイルを作成
-
-ファイル名: `practice/5-async/main.js`
-
-```javascript
-setTimeout(() => {
-  console.log("こんにちは")
-}, 500)
+```js
+new Promise(() => {
+  console.log("[1] Promiseの処理が実行されます")
+})
 ```
 
-500ミリ秒（0.5秒）後に「こんにちは」と表示します。
+- `new Promise()` で Promise を作成します。
+- Promise のコンストラクタに渡した関数は、Promise が作成されると同時に実行されます。
 
 ## 動作確認
 
-ブラウザで `index.html` を開き、開発者ツールのコンソールを確認します。
+ブラウザで `index.html` を開き、デベロッパーツールのコンソールを確認してください。
 
-- 0.5秒後に「こんにちは」と表示される
+`[1] Promiseの処理が実行されます` と表示されます。
 
-## 作業後のディレクトリ構造
-
-```
-practice/
-└── 5-async/
-    ├── index.html
-    └── main.js
-```
+![2-1の結果](assets/demo-2-1.gif)
 
 ---
 
-# サンプル2: 関数化して遅延後に挨拶
-実装例: `/examples/2`
+# Promise の完了
 
-## 目標
+Promise が完了したことを通知する方法を学びます。
 
-遅延処理を関数にまとめて、再利用しやすくします。
-
-## 作業前のディレクトリ構造
+`practice/async/2` を引き続き使います。
 
 ```
-practice/
-└── 5-async/
-    ├── index.html
-    └── main.js
+./
+└── practice
+    └── async
+        └── 2
+            ├── index.html
+            └── main.js
 ```
 
-## 作業
+## `main.js` の変更
 
-1. JavaScriptファイルを更新
+`resolve` を呼び出すことで Promise が完了したことを通知し、`then` で完了後の処理を実行します。
 
-## 1. JavaScriptファイルを更新
+```js
+const promise = new Promise((resolve) => {
+  console.log("[1] Promiseの処理が実行されます")
+  resolve()
+})
 
-ファイル名: `practice/5-async/main.js`
+promise.then(() => {
+  console.log("[2] Promiseの処理が完了しました")
+})
+```
 
-```javascript
-function greetAfterDelay(name, delay) {
+変更した箇所：
+- Promise のコンストラクタの引数に `resolve` を追加しました。
+- `resolve()` を呼び出すことで、Promise が完了したことを通知します。
+- `then` メソッドで、Promise が完了した後に実行する処理を登録します。
+
+## 動作確認
+
+ブラウザで `index.html` を開き、デベロッパーツールのコンソールを確認してください。
+
+次の順番でログが表示されます：
+1. `[1] Promiseの処理が実行されます`
+2. `[2] Promiseの処理が完了しました`
+
+![2-2の結果](assets/demo-2-2.gif)
+
+---
+
+# Promise と setTimeout
+
+Promise と `setTimeout` を組み合わせて、非同期処理を実装します。
+
+`practice/async/2` を引き続き使います。
+
+```
+./
+└── practice
+    └── async
+        └── 2
+            ├── index.html
+            └── main.js
+```
+
+## `main.js` の変更
+
+`setTimeout` を使用して、1秒後に Promise を完了させます。
+
+```js
+const promise = new Promise((resolve) => {
+  console.log("[1] タイマーが開始されます")
   setTimeout(() => {
-    console.log(`こんにちは, ${name}! (delay=${delay} ms)`)
-  }, delay)
-}
+    console.log("[2] タイマーが終了しました")
+    resolve()
+  }, 1000)
+})
 
-greetAfterDelay("たろう", 1000)
+promise.then(() => {
+  console.log("[3] Promiseの処理が完了しました")
+})
 ```
 
-**説明:**
-
-- `greetAfterDelay` 関数は、名前と遅延時間を受け取ります
-- 指定した時間後に、名前と遅延時間を表示します
-- テンプレートリテラル（`` ` ` ``）を使って、変数を文字列に埋め込んでいます
+変更した箇所：
+- `setTimeout` を使用して、1秒後に `resolve()` を呼び出します。
+- タイマーが終了してから Promise が完了します。
 
 ## 動作確認
 
-ブラウザで `index.html` を開き、開発者ツールのコンソールを確認します。
+ブラウザで `index.html` を開き、デベロッパーツールのコンソールを確認してください。
 
-- 1秒後に「こんにちは, たろう! (delay=1000 ms)」と表示される
+次の順番でログが表示されます：
+1. `[1] タイマーが開始されます` （すぐに表示）
+2. `[2] タイマーが終了しました` （1秒後）
+3. `[3] Promiseの処理が完了しました` （1秒後）
 
-## 作業後のディレクトリ構造
-
-```
-practice/
-└── 5-async/
-    ├── index.html
-    └── main.js
-```
+![2-3の結果](assets/demo-2-3.gif)
 
 ---
 
-# サンプル3: 複数回呼び出し（固定の遅延）
-実装例: `/examples/3`
+# Promise で値を返す
 
-## 目標
+Promise で値を返す方法を学びます。
 
-同じ関数を複数回呼び出して、順番に実行されることを確認します。
-
-## 作業前のディレクトリ構造
+`practice/async/2` を引き続き使います。
 
 ```
-practice/
-└── 5-async/
-    ├── index.html
-    └── main.js
+./
+└── practice
+    └── async
+        └── 2
+            ├── index.html
+            └── main.js
 ```
 
-## 作業
+## `main.js` の変更
 
-1. JavaScriptファイルを更新
+`resolve` に値を渡すことで、Promise の完了時に値を返すことができます。
 
-## 1. JavaScriptファイルを更新
-
-ファイル名: `practice/5-async/main.js`
-
-```javascript
-function greetAfterDelay(name, delay) {
+```js
+const promise = new Promise((resolve) => {
+  console.log("[1] タイマーが開始されます")
   setTimeout(() => {
-    console.log(`こんにちは, ${name}! (delay=${delay} ms)`)
-  }, delay)
-}
+    console.log("[2] タイマーが終了しました")
+    resolve(new Date())
+  }, 1000)
+})
 
-greetAfterDelay("たろう", 1000)
-greetAfterDelay("じろう", 2000)
+promise.then((date) => {
+  console.log("[3] Promiseの処理が完了しました")
+  console.log(`[4] 処理が完了した日時: ${date.toISOString()}`)
+})
 ```
 
-**説明:**
-
-- 1つ目の呼び出しは1秒後に「たろう」と表示
-- 2つ目の呼び出しは2秒後に「じろう」と表示
-- 遅延時間が異なるので、順番に表示されます
+変更した箇所：
+- `resolve(new Date())` で現在の日時を返します。
+- `then` の引数として渡された関数で、`date` として値を受け取ります。
 
 ## 動作確認
 
-ブラウザで `index.html` を開き、開発者ツールのコンソールを確認します。
+ブラウザで `index.html` を開き、デベロッパーツールのコンソールを確認してください。
 
-- 1秒後に「こんにちは, たろう! (delay=1000 ms)」と表示される
-- その1秒後（開始から2秒後）に「こんにちは, じろう! (delay=2000 ms)」と表示される
+次の順番でログが表示されます：
+1. `[1] タイマーが開始されます` （すぐに表示）
+2. `[2] タイマーが終了しました` （1秒後）
+3. `[3] Promiseの処理が完了しました` （1秒後）
+4. `[4] 処理が完了した日時: ...` （1秒後）
 
-## 作業後のディレクトリ構造
-
-```
-practice/
-└── 5-async/
-    ├── index.html
-    └── main.js
-```
+![2-4の結果](assets/demo-2-4.gif)
 
 ---
 
-# サンプル4: 複数回呼び出し（ランダムな遅延）
-実装例: `/examples/4`
+# async/await で Promise を扱う
 
-## 目標
+Promise を `async/await` を使って扱う方法を学びます。
 
-ランダムな遅延時間を使うと、実行順序が予測できないことを確認します。これが非同期処理の課題です。
-
-## 作業前のディレクトリ構造
+`practice/async/2` を引き続き使います。
 
 ```
-practice/
-└── 5-async/
-    ├── index.html
-    └── main.js
+./
+└── practice
+    └── async
+        └── 2
+            ├── index.html
+            └── main.js
 ```
 
-## 作業
+## `main.js` の変更
 
-1. JavaScriptファイルを更新
+`async/await` を使用して、Promise の完了を待ちます。
 
-## 1. JavaScriptファイルを更新
-
-ファイル名: `practice/5-async/main.js`
-
-```javascript
-function greetAfterDelay(name, delay) {
-  setTimeout(() => {
-    console.log(`こんにちは, ${name}! (delay=${delay} ms)`)
-  }, delay)
-}
-
-greetAfterDelay("たろう", Math.random() * 5 * 1000)
-greetAfterDelay("じろう", Math.random() * 5 * 1000)
-```
-
-**説明:**
-
-- `Math.random()` は 0 から 1 未満のランダムな数を返します
-- `Math.random() * 5 * 1000` は 0 から 5000 ミリ秒（5秒）のランダムな時間になります
-- どちらが先に表示されるかは、実行するたびに変わります
-
-**問題点:**
-
-- 「たろう」の後に「じろう」が表示されることを保証できません
-- 非同期処理の順序を制御する必要があります
-
-## 動作確認
-
-ブラウザで `index.html` を開き、開発者ツールのコンソールを確認します。
-
-- 「たろう」と「じろう」がランダムな順序で表示される
-- ページを再読み込みすると、順序が変わることがある
-
-## 作業後のディレクトリ構造
-
-```
-practice/
-└── 5-async/
-    ├── index.html
-    └── main.js
-```
-
----
-
-# サンプル5: Promiseで順番を制御
-実装例: `/examples/5`
-
-## 目標
-
-Promise（プロミス）を使って、非同期処理の順序を制御します。
-
-## 作業前のディレクトリ構造
-
-```
-practice/
-└── 5-async/
-    ├── index.html
-    └── main.js
-```
-
-## 作業
-
-1. JavaScriptファイルを更新
-
-## 1. JavaScriptファイルを更新
-
-ファイル名: `practice/5-async/main.js`
-
-```javascript
-function greetAfterDelay(name, delay) {
-  return new Promise((resolve) => {
+```js
+async function main () {
+  const promise = new Promise((resolve) => {
+    console.log("[1] タイマーが開始されます")
     setTimeout(() => {
-      console.log(`こんにちは, ${name}! (delay=${delay} ms)`)
-      resolve()
-    }, delay)
+      console.log("[2] タイマーが終了しました")
+      resolve(new Date())
+    }, 1000)
   })
+
+  const date = await promise
+  console.log("[3] Promiseの処理が完了しました")
+  console.log(`[4] 処理が完了した日時: ${date.toISOString()}`)
 }
 
-greetAfterDelay("たろう", Math.random() * 5 * 1000)
-  .then(() => {
-    return greetAfterDelay("じろう", Math.random() * 5 * 1000)
-  })
+main()
 ```
 
-**説明:**
-
-- **Promise（プロミス）** は、非同期処理が完了したかどうかを管理する仕組みです
-- `new Promise((resolve) => {...})` で Promise を作成します
-- `resolve()` を呼ぶと、「処理が完了した」ことを通知します
-- `.then()` は、前の処理が完了してから次の処理を実行します
-- これにより、ランダムな遅延時間でも必ず「たろう」→「じろう」の順序で表示されます
-
-**用語:**
-
-- **Promise**: 非同期処理の完了（または失敗）を表すオブジェクト
-- **resolve**: Promise を「成功」状態にする関数
-- **.then()**: Promise が成功した後に実行する処理を指定する
+変更した箇所：
+- `async function main()` で非同期関数を定義します。
+- `await promise` で Promise の完了を待ちます。
+- `then` を使わずに、同期的なコードのように書けます。
 
 ## 動作確認
 
-ブラウザで `index.html` を開き、開発者ツールのコンソールを確認します。
+ブラウザで `index.html` を開き、デベロッパーツールのコンソールを確認してください。
 
-- 必ず「たろう」が先に表示される
-- その後に「じろう」が表示される
-- 何度再読み込みしても順序は変わらない
+前のセクションと同じ順番でログが表示されますが、コードがより読みやすくなっています。
 
-## 作業後のディレクトリ構造
-
-```
-practice/
-└── 5-async/
-    ├── index.html
-    └── main.js
-```
+![2-5の結果](assets/demo-2-5.gif)
 
 ---
 
-# サンプル6: ダイアログをPromiseで扱う
-実装例: `/examples/6`
+# Promise を返す関数
 
-## 目標
+Promise を返す関数を作成して、再利用可能にします。
 
-ダイアログでの入力を Promise で扱い、ユーザーの入力を待って次の処理を実行します。
-
-## 作業前のディレクトリ構造
+`practice/async/2` を引き続き使います。
 
 ```
-practice/
-└── 5-async/
-    ├── index.html
-    └── main.js
+./
+└── practice
+    └── async
+        └── 2
+            ├── index.html
+            └── main.js
 ```
 
-## 作業
+## `main.js` の変更
 
-1. HTMLファイルを更新
-2. JavaScriptファイルを更新
+Promise を返す関数を定義します。
 
-## 1. HTMLファイルを更新
+```js
+function startTimer () {
+  return new Promise((resolve) => {
+    console.log("[1] タイマーが開始されます")
+    setTimeout(() => {
+      console.log("[2] タイマーが終了しました")
+      resolve(new Date())
+    }, 1000)
+  })
+}
 
-ファイル名: `practice/5-async/index.html`
+async function main () {
+  const promise = startTimer()
+
+  const date = await promise
+  console.log("[3] Promiseの処理が完了しました")
+  console.log(`[4] 処理が完了した日時: ${date.toISOString()}`)
+}
+
+main()
+```
+
+変更した箇所：
+- `startTimer` 関数を作成し、Promise を返すようにしました。
+- この関数を呼び出すことで、タイマーを開始できます。
+
+## 動作確認
+
+ブラウザで `index.html` を開き、デベロッパーツールのコンソールを確認してください。
+
+前のセクションと同じ動作をしますが、タイマー処理が関数として再利用可能になりました。
+
+![2-6の結果](assets/demo-2-6.gif)
+
+---
+
+# Promise を返す関数の簡潔な使い方
+
+Promise を返す関数を、より簡潔に使用します。
+
+`practice/async/2` を引き続き使います。
+
+```
+./
+└── practice
+    └── async
+        └── 2
+            ├── index.html
+            └── main.js
+```
+
+## `main.js` の変更
+
+変数に代入せずに、直接 `await` します。
+
+```js
+function startTimer () {
+  return new Promise((resolve) => {
+    console.log("[1] タイマーが開始されます")
+    setTimeout(() => {
+      console.log("[2] タイマーが終了しました")
+      resolve(new Date())
+    }, 1000)
+  })
+}
+
+async function main () {
+  const date = await startTimer()
+  console.log("[3] Promiseの処理が完了しました")
+  console.log(`[4] 処理が完了した日時: ${date.toISOString()}`)
+}
+
+main()
+```
+
+変更した箇所：
+- `const promise = startTimer()` と `await promise` を、`await startTimer()` にまとめました。
+- より簡潔なコードになりました。
+
+## 動作確認
+
+ブラウザで `index.html` を開き、デベロッパーツールのコンソールを確認してください。
+
+前のセクションと同じ動作をします。
+
+![2-7の結果](assets/demo-2-7.gif)
+
+---
+
+# ダイアログで非同期処理
+
+ダイアログを使用した非同期処理を実装します。
+
+`practice/async/3` を新しく作ります。
+
+```
+./
+└── practice
+    └── async
+        └── 3
+            ├── index.html
+            └── main.js
+```
+
+## `index.html`
 
 ```html
 <html>
@@ -378,106 +696,80 @@ practice/
 </html>
 ```
 
-**説明:**
+## `main.js`
 
-- ダイアログを開くボタン（`openButton`）
-- 名前を入力するダイアログ（`dialog`）
-- 入力結果を表示するエリア（`result`）
-
-## 2. JavaScriptファイルを更新
-
-ファイル名: `practice/5-async/main.js`
-
-```javascript
+```js
 const dialog = document.getElementById("dialog")
 const openButton = document.getElementById("openButton")
-const namteText = document.getElementById("nameText")
+const nameText = document.getElementById("nameText")
 const result = document.getElementById("result")
 const nameInput = document.getElementById("nameInput")
 const submitButton = document.getElementById("submitButton")
 
 function openNameDialog() {
-  return new Promise((resolve) => {
-    submitButton.addEventListener("click", () => {
-      const name = nameInput.value;
-      resolve(name)
-    })
+  dialog.showModal()
+
+  submitButton.addEventListener("click", () => {
+    const name = nameInput.value;
+    result.hidden = false;
+    nameText.textContent = name;
+    dialog.close()
   })
 }
 
 openButton.addEventListener("click", () => {
-  openNameDialog().then((name) => {
-    result.hidden = false;
-    namteText.textContent = name;
-    dialog.close()
-  })
+  openNameDialog()
 })
 ```
 
-**説明:**
-
-- `openNameDialog()` 関数は Promise を返します
-- ユーザーが「確定する」ボタンをクリックすると `resolve(name)` が呼ばれます
-- `.then((name) => {...})` で、入力された名前を受け取って表示します
-- Promise を使うことで、「ユーザーの入力を待つ」処理を分かりやすく書けます
-
-**注意:** `namteText` はタイポ（本来は `nameText`）ですが、exampleの通りに記載しています。
+- ダイアログを開いて名前を入力し、確定ボタンを押すと結果が表示されます。
+- ただし、この実装では入力した値を非同期的に取得できていません。
 
 ## 動作確認
 
-ブラウザで `index.html` を開きます。
+ブラウザで `index.html` を開いてください。
 
-- 「開く」ボタンをクリックするとダイアログが表示される
-- 名前を入力して「確定する」をクリックする
-- 入力した名前が表示される
+ボタンをクリックしてダイアログを開き、名前を入力して確定すると結果が表示されます。
 
-## 作業後のディレクトリ構造
-
-```
-practice/
-└── 5-async/
-    ├── index.html
-    └── main.js
-```
+![3-1の結果](assets/demo-3-1.gif)
 
 ---
 
-# サンプル7: async/awaitで読みやすく
-実装例: `/examples/7`
+# Promise を使ったダイアログ
 
-## 目標
+Promise を使用してダイアログの入力値を非同期的に取得します。
 
-async/await を使って、Promise をより読みやすく書きます。
-
-## 作業前のディレクトリ構造
+`practice/async/3` を引き続き使います。
 
 ```
-practice/
-└── 5-async/
-    ├── index.html
-    └── main.js
+./
+└── practice
+    └── async
+        └── 3
+            ├── index.html
+            └── main.js
 ```
 
-## 作業
+## `main.js` の変更
 
-1. JavaScriptファイルを更新
+`openNameDialog` 関数が Promise を返すように変更し、`async/await` を使って値を取得します。
 
-## 1. JavaScriptファイルを更新
-
-ファイル名: `practice/5-async/main.js`
-
-```javascript
+```js
 const dialog = document.getElementById("dialog")
 const openButton = document.getElementById("openButton")
-const namteText = document.getElementById("nameText")
+const nameText = document.getElementById("nameText")
 const result = document.getElementById("result")
 const nameInput = document.getElementById("nameInput")
 const submitButton = document.getElementById("submitButton")
 
 function openNameDialog() {
   return new Promise((resolve) => {
+    dialog.showModal()
+
     submitButton.addEventListener("click", () => {
       const name = nameInput.value;
+      dialog.close()
+
       resolve(name)
     })
   })
@@ -486,72 +778,37 @@ function openNameDialog() {
 openButton.addEventListener("click", async () => {
   const name = await openNameDialog()
   result.hidden = false;
-  namteText.textContent = name;
-  dialog.close()
+  nameText.textContent = name;
 })
 ```
 
-**説明:**
-
-- `async () => {...}` の `async` は、この関数が非同期処理を含むことを示します
-- `await openNameDialog()` の `await` は、Promise が完了するまで待つことを示します
-- `.then()` を使った書き方と比べて、より読みやすく、同期処理のように書けます
-
-**比較:**
-
-```javascript
-// .then() を使った書き方
-openNameDialog().then((name) => {
-  result.hidden = false;
-  namteText.textContent = name;
-  dialog.close()
-})
-
-// async/await を使った書き方
-const name = await openNameDialog()
-result.hidden = false;
-namteText.textContent = name;
-dialog.close()
-```
-
-**用語:**
-
-- **async**: 非同期関数を定義するキーワード
-- **await**: Promise の完了を待つキーワード（async 関数の中でのみ使える）
+変更した箇所：
+- `openNameDialog` 関数が `Promise` を返すようにしました。
+- 確定ボタンがクリックされたときに `resolve(name)` で名前を返します。
+- `openButton` のイベントリスナーに `async` キーワードを付けて、`await` を使用してダイアログが閉じるのを待ってから結果を表示します。
+- この実装により、ダイアログの入力値を非同期的に取得できます。
 
 ## 動作確認
 
-ブラウザで `index.html` を開きます。
+ブラウザで `index.html` を開いてください。
 
-- 「開く」ボタンをクリックするとダイアログが表示される
-- 名前を入力して「確定する」をクリックする
-- 入力した名前が表示される
-- サンプル6と同じ動作ですが、コードがより読みやすくなっています
+ボタンをクリックしてダイアログを開き、名前を入力して確定すると結果が表示されます。
 
-## 作業後のディレクトリ構造
-
-```
-practice/
-└── 5-async/
-    ├── index.html
-    └── main.js
-```
+![3-2の結果](assets/demo-3-2.gif)
 
 ---
 
 # まとめ
 
-この節では、非同期処理の基本から Promise、async/await まで学びました。
+この節では非同期処理について学びました。
 
-**学んだこと:**
+- `setTimeout` を使用した基本的な非同期処理
+- Promise を使用した非同期処理の連鎖
+- `async/await` を使用した読みやすい非同期処理
+- ダイアログと組み合わせた実践的な非同期処理
 
-1. **非同期処理の課題**: ランダムな遅延では実行順序を制御できない
-2. **Promise**: 非同期処理の完了を管理する仕組み
-3. **.then()**: Promise の完了後に処理を実行する
-4. **async/await**: Promise をより読みやすく書く方法
-
-これらの知識は、次の節以降でも頻繁に使います。特に、ユーザーの操作を待つ処理やサーバーとの通信で重要になります。
+非同期処理は、ユーザーインターフェースを応答性の高いものにするために重要な技術です。
 
 # 次の項
 
-[6. アバター表示](../6-avater-view/README.md)
+次の節に進んでください。

@@ -1,23 +1,21 @@
 const dialog = document.getElementById("dialog")
 const openButton = document.getElementById("openButton")
-const namteText = document.getElementById("nameText")
+const nameText = document.getElementById("nameText")
 const result = document.getElementById("result")
 const nameInput = document.getElementById("nameInput")
 const submitButton = document.getElementById("submitButton")
 
 function openNameDialog() {
-  return new Promise((resolve) => {
-    submitButton.addEventListener("click", () => {
-      const name = nameInput.value;
-      resolve(name)
-    })
+  dialog.showModal()
+
+  submitButton.addEventListener("click", () => {
+    const name = nameInput.value;
+    result.hidden = false;
+    nameText.textContent = name;
+    dialog.close()
   })
 }
 
 openButton.addEventListener("click", () => {
-  openNameDialog().then((name) => {
-    result.hidden = false;
-    namteText.textContent = name;
-    dialog.close()
-  })
+  openNameDialog()
 })
