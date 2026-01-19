@@ -1,5 +1,5 @@
-export const root = document.getElementById('speaker')
-export const contentText = document.getElementById('speakerContent')
+const root = document.getElementById('speaker')
+const contentText = document.getElementById('speakerContent')
 
 export function start (content) {
   contentText.textContent = content

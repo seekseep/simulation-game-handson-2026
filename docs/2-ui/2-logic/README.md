@@ -78,8 +78,8 @@ export function close () {
 ファイル名: `app/assets/js/speaker.js`
 
 ```javascript
-export const root = document.getElementById('speaker')
-export const contentText = document.getElementById('speakerContent')
+const root = document.getElementById('speaker')
+const contentText = document.getElementById('speakerContent')
 
 export async function start (content) {
   contentText.textContent = content
