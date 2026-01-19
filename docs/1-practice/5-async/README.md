@@ -839,4 +839,4 @@ openButton.addEventListener("click", async () => {
 
 # 次の項
 
-次の節に進んでください。
+[3DCG の操作](../6-aveterView/README.md)

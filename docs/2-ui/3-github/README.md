@@ -229,4 +229,4 @@ GitHubアカウントとの連携を許可します。
 
 # 次の項
 
-[Vercelへのデプロイ](../4-deploy/README.md)
+[Vercelデプロイ](../4-vercel/README.md)

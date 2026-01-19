@@ -869,4 +869,4 @@ menu.teachButton.addEventListener('click', async () => {
 
 # 次の項
 
-[GitHub に公開する](./3-github.md)
+[GitHub設定](../3-github/README.md)

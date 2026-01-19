@@ -336,3 +336,9 @@ https://sketchfab.com/3d-models/quirky-series-free-animals-pack-19e91ef86cd0448f
 # まとめ
 
 この節では Three.js を使って 3DCG を描画するとても簡単な例を紹介しました。
+
+---
+
+# 次の項
+
+第1章が終わったら、[第2章: UI構築](../../2-ui/README.md) に進みましょう。
