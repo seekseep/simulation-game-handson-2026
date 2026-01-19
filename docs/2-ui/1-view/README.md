@@ -395,6 +395,21 @@ menu.teachButton.addEventListener('click', () => {
 
 言葉を入力するダイアログを作成します。
 
+## 目標
+
+次のような構成にします
+
+```mermaid
+graph LR
+  index["index.html"] --> main["assets/js/main.js"]
+  index --> styleCss["assets/css/style.css"]
+  main --> avater["assets/js/avater.js"]
+  main --> menu["assets/js/menu.js"]
+  main --> inputWordDialog["assets/js/inputWordDialog.js"]
+  styleCss --> avaterCss["assets/css/avater.css"]
+  styleCss --> menuCss["assets/css/menu.css"]
+```
+
 ## `index.html`
 
 `<body>` の直下に次のHTMLを追加してください。
@@ -445,4 +460,270 @@ menu.teachButton.addEventListener('click', () => {
 
 ```
 
-## `input-word-dialog.js`
+## `inputWordDialog.js`
+
+`assets/js/` ディレクトリの中に `inputWordDialog.js` という名前のファイルを作成し、次の内容を記述してください。
+
+```js
+const dialog = document.getElementById('inputWordDialog')
+const submitButton = document.getElementById('submitInputWordButton')
+const cancelButton = document.getElementById('cancelInputWordButton')
+const input = document.getElementById('wordInput')
+
+export async function open () {
+  dialog.showModal()
+  input.value = "";
+
+  return new Promise((resolve) => {
+    cancelButton.addEventListener('click', () => {
+      dialog.close()
+      resolve(null)
+    })
+
+    submitButton.addEventListener('click', () => {
+      dialog.close()
+      resolve(input.value)
+    })
+  })
+}
+
+```
+
+## `main.js`
+
+作成した `inputWordDialog.js` を読み込むように修正してください。
+
+```js
+import * as inputWordDialog from './inputWordDialog.js'
+```
+
+「教える」ボタンがクリックされたときにダイアログを開くように修正してください。
+
+`content` には入力された言葉が格納されます。
+`content` の値がない場合はキャンセルされたことを意味します。
+
+```js
+menu.teachButton.addEventListener('click', async () => {
+  console.log('動物に教える')
+  menu.close()
+
+  const content = await inputWordDialog.open()
+  if (!content) {
+    console.log('言葉の入力がキャンセルされました')
+    return
+  }
+  console.log(`動物に「${content}」を教えました`)
+})
+
+```
+
+全体の `main.js` は次のようになります。
+
+```js
+import * as avater from './avater.js'
+import * as menu from './menu.js'
+import * as inputWordDialog from './inputWordDialog.js'
+
+avater.view.addEventListener('animal-click', () => {
+  menu.open()
+})
+
+menu.talkButton.addEventListener('click', () => {
+  console.log('動物と話す')
+  menu.close()
+})
+
+menu.teachButton.addEventListener('click', async () => {
+  console.log('動物に教える')
+  menu.close()
+
+  const content = await inputWordDialog.open()
+  if (!content) {
+    console.log('言葉の入力がキャンセルされました')
+    return
+  }
+  console.log(`動物に「${content}」を教えました`)
+})
+
+```
+
+## 動作確認
+
+次のように動作することを確認してください。
+
+入力された内容がコンソールに表示されます。
+
+![4の結果](assets/demo-4.gif)
+
+# 言葉の分類を選ぶ
+
+言葉の分類を選ぶダイアログを作成します。
+
+## 目標
+
+```mermaid
+graph LR
+  index["index.html"] --> main["assets/js/main.js"]
+  index --> styleCss["assets/css/style.css"]
+  main --> avater["assets/js/avater.js"]
+  main --> menu["assets/js/menu.js"]
+  main --> inputWordDialog["assets/js/inputWordDialog.js"]
+  main --> selectCategoryDialog["assets/js/selectWordCategoryDialog.js"]
+  styleCss --> avaterCss["assets/css/avater.css"]
+  styleCss --> menuCss["assets/css/menu.css"]
+```
+
+## `index.html`
+
+`<body>` の直下に次のHTMLを追加してください。
+
+```html
+<dialog id="selectWordCategoryDialog">
+  <p>分野を選んでください:</p>
+  <div id="selectWordCategoryList">
+    <button value="あいさつ">あいさつ</button>
+    <button value="食べ物">食べ物</button>
+    <button value="必殺技">必殺技</button>
+    <button value="場所">場所</button>
+  </div>
+</dialog>
+```
+
+最終的なHTMLは次のようになります。
+
+```html
+<html>
+  <head>
+    <link rel="stylesheet" href="./assets/css/style.css">
+  </head>
+  <body>
+    <div id="menu" hidden>
+      <button id="teachButton">教える</button>
+      <button id="talkButton">話す</button>
+    </div>
+    <div id="avater"></div>
+    <dialog id="inputWordDialog">
+      <label for="wordInput">言葉を入力してください:</label>
+      <input type="text" id="wordInput" name="word" required>
+      <div>
+        <button id="cancelInputWordButton">キャンセル</button>
+        <button id="submitInputWordButton">確定する</button>
+      </div>
+    </dialog>
+    <dialog id="selectWordCategoryDialog">
+      <p>分野を選んでください:</p>
+      <div id="selectWordCategoryList">
+        <button value="あいさつ">あいさつ</button>
+        <button value="食べ物">食べ物</button>
+        <button value="必殺技">必殺技</button>
+        <button value="場所">場所</button>
+      </div>
+    </dialog>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+    <script type="module" src="./assets/js/main.js"></script>
+  </body>
+</html>
+
+```
+
+## `selectWordCategoryDialog.js`
+
+`assets/js/` ディレクトリの中に `selectWordCategoryDialog.js` という名前のファイルを作成し、次の内容を記述してください。
+
+```js
+const dialog = document.getElementById('selectWordCategoryDialog')
+const buttons = document.querySelectorAll('#selectWordCategoryList button')
+
+export async function open () {
+  dialog.showModal()
+
+  return new Promise((resolve) => {
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        dialog.close()
+        resolve(button.value)
+      })
+    })
+  })
+}
+
+```
+
+ボタンがクリックされたときに、ボタンが持つ `value` の内容が返されるようになっています。
+
+`querySelectorAll` を使って、4つのボタン要素を取得しています。CSSのセレクタで複数の要素を取得する方法です。今回は `#selectWordCategoryList button` で、`id` が `selectWordCategoryList` の要素の中にある `button` 要素を全て取得しています。
+
+対象となるのは次の要素
+```html
+<button value="あいさつ">あいさつ</button>
+<button value="食べ物">食べ物</button>
+<button value="必殺技">必殺技</button>
+<button value="場所">場所</button>
+```
+
+詳しくは [Document: querySelectorAll() メソッド](https://developer.mozilla.org/ja/docs/Web/API/Document/querySelectorAll) を参照してください。
+
+## `main.js`
+
+作成した `selectWordCategoryDialog.js` を読み込むように修正してください。
+```js
+import * as selectCategoryDialog from './selectWordCategoryDialog.js'
+```
+
+「教える」ボタンがクリックされたときに、言葉の入力ダイアログの後に分類選択ダイアログを開くように修正してください。
+```js
+const wordCategory = await selectWordCategoryDialog.open()
+console.log(`選ばれた分野: ${wordCategory}`)
+```
+
+最終的には次のようになります。
+
+```js
+import * as avater from './avater.js'
+import * as menu from './menu.js'
+import * as inputWordDialog from './inputWordDialog.js'
+import * as selectWordCategoryDialog from './selectWordCategoryDialog.js'
+
+avater.view.addEventListener('animal-click', () => {
+  menu.open()
+})
+
+menu.talkButton.addEventListener('click', () => {
+  console.log('動物と話す')
+  menu.close()
+})
+
+menu.teachButton.addEventListener('click', async () => {
+  console.log('動物に教える')
+  menu.close()
+
+  const content = await inputWordDialog.open()
+  if (!content) {
+    console.log('言葉の入力がキャンセルされました')
+    return
+  }
+  console.log(`動物に「${content}」を教えました`)
+
+  const wordCategory = await selectWordCategoryDialog.open()
+  console.log(`選ばれた分野: ${wordCategory}`)
+})
+
+```
+
+## 動作確認
+
+ブラウザで `index.html` を開き、動物をクリックしてメニューを表示します。
+「教える」ボタンをクリックして言葉を入力し、確定ボタンをクリックします。
+続いて表示される分類選択ダイアログで分類ボタンをクリックします。
+選択された分類がコンソールに表示されることを確認してください
+
+![5の結果](assets/demo-5.gif)
+
+
