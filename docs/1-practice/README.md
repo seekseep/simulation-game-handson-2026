@@ -13,7 +13,7 @@
 - ダイアログの作り方（入力画面の表示）
 - setTimeout の使い方（時間を扱う処理）
 - 非同期処理（async/await）の基本
-- Three.js を使った 3D 表示
+- 3DCG の操作（Three.js を使った基本）
 
 ## 環境構築
 
@@ -28,10 +28,7 @@
 - Live Server 拡張機能がインストールされていること
   - ダウンロードリンク: https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
 
-
 ![LiveServerのデモ](assets/live-server-demo.gif)
-
-
 
 ### ブラウザ
 
@@ -62,16 +59,16 @@ VSCode を起動して左側に表示されるエクスプローラペインの�
 
 ![ワークスペースを開く](assets/open-workspace.gif)
 
-## セクション
+## 章の構成
 
-この章は以下の6つのセクションで構成されています。順番に進めてください。
+この章は以下の6つの節で構成されています。順番に進めてください。
 
-1. [HTML/CSS の基本](../1-html-css/README.md)
-2. [JavaScript のデバッグ](../2-debug/README.md)
-3. [ダイアログの作成](../3-dialog/README.md)
-4. [setTimeout の使い方](../4-settimeout/README.md)
-5. [非同期処理の基本](../5-async-await/README.md)
-6. [Three.js 入門](../6-threejs/README.md)
+1. [HTML/CSS の基本](1-html-css/README.md)
+2. [JavaScript のデバッグ](2-debug/README.md)
+3. [ダイアログの作成](3-dialog/README.md)
+4. [setTimeout の使い方](4-set-timeout/README.md)
+5. [非同期処理の基本](5-async/README.md)
+6. [3DCG の操作](6-avater-view/README.md)
 
 ---
 
