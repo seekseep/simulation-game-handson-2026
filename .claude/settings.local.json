@@ -3,7 +3,9 @@
     "allow": [
       "Bash(cat:*)",
       "Bash(tree:*)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(grep:*)",
+      "Bash(git restore:*)"
     ]
   }
 }
