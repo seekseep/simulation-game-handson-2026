@@ -4,21 +4,15 @@ export async function POST() {
   // Supabaseクライアントを取得
   const supabase = getSupabaseClient()
 
-  // wordsとtemplatesを並列で取得
-  const [wordsResult, templatesResult] = await Promise.all([
-    supabase.from('words').select('*').order('id'),
-    supabase.from('templates').select('*').order('id')
-  ])
-
-  const words = wordsResult.data
-  const templates = templatesResult.data
+  const { data: words } = await supabase.from('words').select('*').order('id')
+  const { data: templates } = await supabase.from('templates').select('*').order('id')
 
   // ランダムに言葉を選択
   const word = words[Math.floor(Math.random() * words.length)]
 
   // 言葉のカテゴリに合致するテンプレートをフィルタ
   const categoryTemplates = templates.filter(
-    template => template.word_category_id == word.content_category_id
+    template => template.word_category_id == word.word_category_id
   )
 
   // ランダムにテンプレートを選択

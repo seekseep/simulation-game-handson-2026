@@ -42,7 +42,7 @@ async function main () {
 
     await speaker.start(`「${wordCategory.name}」の分野を選びました`)
 
-    const newWord = { word, wordCategoryId: wordCategory.id }
+    const newWord = { content, wordCategoryId: wordCategory.id }
     await storage.addWord(newWord)
 
     words.push(newWord)
