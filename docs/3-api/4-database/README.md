@@ -446,6 +446,10 @@ npm i @supabase/supabase-js
 node_modules
 ```
 
+インストールされたライブラリは `node_modules` ディレクトリに格納されますが、このディレクトリは非常に大きくなるため、Gitで管理しないようにします。
+
+Vercel は `package.json` ファイルを認識してNode.jsプロジェクトとして扱います。自動で依存関係がインストールされます。
+
 ## package.json の確認
 
 ルートに作成されている `package.json` ファイルを確認してください。
