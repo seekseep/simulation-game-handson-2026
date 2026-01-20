@@ -4,11 +4,11 @@ INSERT INTO word_categories (id, name) VALUES
   (3, '必殺技'),
   (4, '場所');
 
-INSERT INTO words (id, content, word_category_id) VALUES
-  (1, 'おざまーっす', 1),
-  (2, 'くわいの煮物', 2),
-  (3, 'ドラゴンブレイク', 3),
-  (4, '秘密基地', 4);
+INSERT INTO words (content, word_category_id) VALUES
+  ('おざまーっす', 1),
+  ('くわいの煮物', 2),
+  ('ドラゴンブレイク', 3),
+  ('秘密基地', 4);
 
 INSERT INTO templates (id, content, word_category_id, motion) VALUES
   (1, 'おはようからおやすみまで「{言葉}」でお送りしています', 1, 'idle'),
