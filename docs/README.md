@@ -114,8 +114,6 @@ Google Gemini AIを使って、キャラクターに性格を持たせます。
 - **Supabase** (第3章で使用) - https://supabase.com/
 - **Google AI Studio** (第4章で使用) - https://aistudio.google.com/
 
-詳しくは [DOCUMENT_ARCHITECTURE.md](../.claude/DOCUMENT_ARCHITECTURE.md) をご覧ください。
-
 ## プロジェクトの構成
 
 ```
