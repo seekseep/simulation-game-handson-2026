@@ -732,6 +732,11 @@ menu.teachButton.addEventListener('click', async () => {
 
 ## `selectWordCategoryDialog.js` の修正
 
+以下のコードを追加
+```js
+const categoryList = document.getElementById('selectWordCategoryList')
+```
+
 `open()` の関数が `categories` という引数を受け取るように修正します。
 
 ここでは次のような `categories` を期待します。
@@ -771,6 +776,35 @@ export async function open (categories) {
 ```
 
 `document.createElement('button')` は `<button>` を作成します。
+
+最終的な `selectWordCategoryDialog.js` は次のようになります。
+
+```js
+const dialog = document.getElementById('selectWordCategoryDialog')
+const categoryList = document.getElementById('selectWordCategoryList')
+
+export async function open (categories) {
+  dialog.showModal()
+
+  categoryList.innerHTML = '';
+
+  return new Promise((resolve) => {
+    categories.forEach((category) => {
+      const button = document.createElement('button')
+      button.value = category;
+      button.textContent = category;
+
+      button.addEventListener('click', () => {
+        dialog.close()
+        resolve(button.value)
+      })
+
+      categoryList.appendChild(button)
+    })
+  })
+}
+
+```
 
 ## `main.js` の修正
 
