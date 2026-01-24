@@ -826,6 +826,55 @@ menu.teachButton.addEventListener('click', async () => {
 
 ```
 
+## `index.html` の修正
+
+分野を選ぶダイアログを以下のように変更する
+
+```html
+  <dialog id="selectWordCategoryDialog">
+    <p>分野を選んでください:</p>
+    <div id="selectWordCategoryList"></div>
+  </dialog>
+```
+
+最終的な　HTMLは次のようになります。
+
+```html
+<html>
+  <head>
+    <link rel="stylesheet" href="./assets/css/style.css">
+  </head>
+  <body>
+    <div id="menu" hidden>
+      <button id="teachButton">教える</button>
+      <button id="talkButton">話す</button>
+    </div>
+    <div id="avater"></div>
+    <dialog id="inputWordDialog">
+      <label for="wordInput">言葉を入力してください:</label>
+      <input type="text" id="wordInput" name="word" required>
+      <div>
+        <button id="cancelInputWordButton">キャンセル</button>
+        <button id="submitInputWordButton">確定する</button>
+      </div>
+    </dialog>
+    <dialog id="selectWordCategoryDialog">
+      <p>分野を選んでください:</p>
+      <div id="selectWordCategoryList"></div>
+    </dialog>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+    <script type="module" src="./assets/js/main.js"></script>
+  </body>
+</html>
+```
+
 ## 動作確認
 
 前の節と同様に動作することを確認してください。
