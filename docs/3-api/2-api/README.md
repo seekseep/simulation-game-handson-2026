@@ -869,7 +869,7 @@ vercel dev が起動している状態で、アプリケーションが正しく
 WordをAPI経由で保存するために新しいエンドポイントを作りましょう。
 ただし、現時点ではデータベースが用意されていないので仮のものを作成します。
 
-## `api/words/index.js`
+## `api/words.js`
 
 ```js
 export async function POST(req) {
@@ -882,7 +882,7 @@ export async function POST(req) {
 }
 ```
 
-最終的な `api/words/index.js` は以下のようになります。
+最終的な `api/words.js` は以下のようになります。
 
 ```js
 export async function GET() {

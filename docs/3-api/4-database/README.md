@@ -846,9 +846,9 @@ export async function GET() {
   // Supabaseクライアントを取得
   const supabase = getSupabaseClient()
 
-  // templatesテーブルからデータを取得
+  // word_categoriesテーブルからデータを取得
   const { data } = await supabase
-    .from('templates')
+    .from('word_categories')
     .select('*')
     .order('id')
 
